@@ -72,6 +72,9 @@ set background=dark
 set t_Co=256
 set number
 set backspace=indent,eol,start
+if has('gui_running')
+	set guifont=Inconsolata:h11,Consolas:h11,Source_Code_Pro:h11
+endif
 syntax on
 au BufRead,BufNewFile *.nvimrc set filetype=vim
 au BufRead,BufNewFile *.ss set filetype=racket
