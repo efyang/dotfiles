@@ -163,7 +163,7 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 " Set Colorscheme
-colors harlequin
+colors molokai
 hi Normal guibg=none ctermbg=none
 hi NonText guibg=none ctermbg=none
 let g:loaded_syntastic_rust_rustc_checker = 1
