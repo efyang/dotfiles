@@ -167,8 +167,11 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 " Set Colorscheme
 colors molokai
-hi Normal guibg=none ctermbg=none
-hi NonText guibg=none ctermbg=none
+if has("win32")
+else
+	hi Normal guibg=none ctermbg=none
+	hi NonText guibg=none ctermbg=none
+endif
 let g:loaded_syntastic_rust_rustc_checker = 1
 let g:syntastic_extra_filetypes = ['rust']
 let g:syntastic_rust_checkers = ['rust', 'rustc']
