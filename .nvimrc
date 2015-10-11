@@ -23,29 +23,29 @@ Plug 'LaTeX-Box-Team/LaTeX-Box', {'for' : 'LaTeX'}
 Plug 'vitalk/vim-shebang'
 Plug 'cespare/vim-toml', {'for' : 'toml'}
 " Colorschemes
-Plug 'godlygeek/csapprox'
-Plug 'tomasr/molokai'
-Plug 'nanotech/jellybeans.vim'
-Plug 'nielsmadan/harlequin'
-Plug 'altercation/vim-colors-solarized'
+"Plug 'godlygeek/csapprox'
 Plug 'bronson/vim-crosshairs'
+Plug 'geoffharcourt/one-dark.vim'
+Plug 'zeis/vim-kolor'
+Plug 'Yggdroot/indentline'
 " Exterior addons
 Plug 'bling/vim-airline'
 Plug 'ryanss/vim-hackernews', {'on': 'HackerNews'}
 Plug 'itchyny/calendar.vim', {'on': 'Calendar'}
 Plug 'mhinz/vim-startify'
 Plug 'joshhartigan/vim-reddit', {'on': 'Reddit'}
+Plug 'chrisbra/Colorizer'
 " Useful Programs
 Plug 'floobits/floobits-neovim'
-Plug 'kien/rainbow_parentheses.vim' 
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'scrooloose/syntastic'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'mhinz/vim-signify'
 Plug 'majutsushi/tagbar' 
-Plug 'nathanaelkane/vim-indent-guides', {'for' : 'python'}
 Plug 'scrooloose/nerdcommenter'
-Plug 'tpope/vim-surround'
+"Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'thinca/vim-quickrun', {'on': 'QuickRun'} 
 Plug 'benekastah/neomake', {'on': 'Neomake'}
@@ -125,7 +125,7 @@ let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
-set encoding=utf-8
+"set encoding=utf-8
 "autostarts NERDTree 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | e
 "autocmd vimenter * IndentGuidesEnable
@@ -137,41 +137,24 @@ nmap <F6> :Goyo<CR>
 autocmd User GoyoEnter Limelight
 autocmd User GoyoLeave Limelight!
 "Enclosing colors
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-let g:rbpt_max = 16
-let g:rbpt_loadcmd_toggle = 0
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+au VimEnter * RainbowParentheses
+let g:rainbow#max_level = 1
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 " Set Colorscheme
-colors molokai
-if has("win32")
-else
-	hi Normal guibg=none ctermbg=none
-	hi NonText guibg=none ctermbg=none
-endif
+colors kolor
+"if has("win32")
+"else
+	"hi Normal guibg=none ctermbg=none
+	"hi NonText guibg=none ctermbg=none
+"endif
 let g:loaded_syntastic_rust_rustc_checker = 1
 let g:syntastic_extra_filetypes = ['rust']
 let g:syntastic_rust_checkers = ['rust', 'rustc']
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set mouse=
+let g:indentLine_char = '│'
+let g:indentLine_color_gui = '#3B3D3A'
