@@ -44,8 +44,7 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'mhinz/vim-signify'
 Plug 'majutsushi/tagbar' 
 Plug 'scrooloose/nerdcommenter'
-"Plug 'tpope/vim-surround'
-Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'thinca/vim-quickrun', {'on': 'QuickRun'} 
 Plug 'benekastah/neomake', {'on': 'Neomake'}
@@ -54,13 +53,15 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-fugitive'
 Plug 'L9'
-Plug 'kien/ctrlp.vim', {'on': ['<C-p>', 'CtrlP', 'CtrlPBuffer', 'CtrlPPMRU', 'CtrlPMixed']}
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/limelight.vim', {'on': ['Goyo', 'LimeLight']}
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'}
 Plug 'wikitopian/hardmode'
 " Useful Programs that are mainly for insert mode
-Plug 'Raimondi/delimitMate'
+"Plug 'Raimondi/delimitmate'
+Plug 'kana/vim-smartinput'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
@@ -69,7 +70,6 @@ Plug 'honza/vim-snippets'
 call plug#end()            " required
 set nocompatible              " be iMproved, required
 set background=dark
-set t_Co=256
 set number
 set backspace=indent,eol,start
 if has('gui_running')
@@ -138,7 +138,7 @@ autocmd User GoyoEnter Limelight
 autocmd User GoyoLeave Limelight!
 "Enclosing colors
 au VimEnter * RainbowParentheses
-let g:rainbow#max_level = 1
+let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
@@ -146,15 +146,15 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 " Set Colorscheme
 colors kolor
-"if has("win32")
-"else
-	"hi Normal guibg=none ctermbg=none
-	"hi NonText guibg=none ctermbg=none
-"endif
-let g:loaded_syntastic_rust_rustc_checker = 1
+"let g:loaded_syntastic_rust_rustc_checker = 1
 let g:syntastic_extra_filetypes = ['rust']
 let g:syntastic_rust_checkers = ['rust', 'rustc']
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set mouse=
 let g:indentLine_char = '│'
 let g:indentLine_color_gui = '#3B3D3A'
+"switch buffers
+noremap <c-j> :bnext<cr>
+noremap <c-k> :bprevious<cr>
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
