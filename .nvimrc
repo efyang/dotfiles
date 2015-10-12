@@ -62,7 +62,8 @@ Plug 'junegunn/goyo.vim', {'on': 'Goyo'}
 Plug 'wikitopian/hardmode'
 " Useful Programs that are mainly for insert mode
 "Plug 'Raimondi/delimitmate'
-Plug 'kana/vim-smartinput'
+"Plug 'kana/vim-smartinput'
+Plug 'jiangmiao/auto-pairs'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
@@ -129,7 +130,9 @@ let g:airline_symbols.whitespace = 'Ξ'
 "set encoding=utf-8
 "autostarts NERDTree 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | e
-"autocmd vimenter * IndentGuidesEnable
+"autostarts autopairs
+autocmd vimenter * :call AutoPairsTryInit()
+let g:AutoPairs = {'(': ')', '[': ']', '{': '}', '<': '>', "'": "'", '"': '"', '`': '`'}
 "nmap <F9> :MinimapToggle<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F7> :Goyo<CR>
@@ -139,6 +142,7 @@ autocmd User GoyoEnter Limelight
 autocmd User GoyoLeave Limelight!
 "Enclosing colors
 au VimEnter * RainbowParentheses
+"au BufEnter * :call AutoPairsTryInit()
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
