@@ -11,6 +11,7 @@ Plug 'elzr/vim-json', {'for' : 'json'}
 Plug 'derekwyatt/vim-scala', {'for' : 'scala'}
 Plug 'fatih/vim-go', {'for' : 'go'}
 Plug 'rust-lang/rust.vim', {'for' : 'rust'}
+Plug 'mattn/webapi-vim', {'for' : 'rust'}
 Plug 'phildawes/racer', {'for' : 'rust', 'do' : 'cargo build --release -j8'}
 Plug 'lukerandall/haskellmode-vim', {'for' : 'haskell'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for' : 'cpp'}
