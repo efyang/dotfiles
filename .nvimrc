@@ -53,6 +53,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-fugitive'
 Plug 'L9'
+"Plug 'severin-lemaignan/vim-minimap'
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/vim-easy-align'
@@ -129,10 +130,10 @@ let g:airline_symbols.whitespace = 'Ξ'
 "autostarts NERDTree 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | e
 "autocmd vimenter * IndentGuidesEnable
-nmap <F9> :QuickRun<CR>
+"nmap <F9> :MinimapToggle<CR>
 nmap <F8> :TagbarToggle<CR>
-nmap <F7> :NERDTreeToggle<CR>
-nmap <F6> :Goyo<CR>
+nmap <F7> :Goyo<CR>
+nmap <F6> :NERDTreeToggle<CR>
 "Goyo/limelight focus config
 autocmd User GoyoEnter Limelight
 autocmd User GoyoLeave Limelight!
@@ -146,7 +147,6 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 " Set Colorscheme
 colors kolor
-"let g:loaded_syntastic_rust_rustc_checker = 1
 let g:syntastic_extra_filetypes = ['rust']
 let g:syntastic_rust_checkers = ['rust', 'rustc']
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -158,3 +158,4 @@ noremap <c-j> :bnext<cr>
 noremap <c-k> :bprevious<cr>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+set cursorline
