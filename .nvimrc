@@ -130,20 +130,25 @@ let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 "set encoding=utf-8
 "autostarts NERDTree 
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | e
+autocmd bufenter * :call StartupFunctions()
+function StartupFunctions() 
+	if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | e
+	endif
+	:call AutoPairsInit()
+endfunction
 "autostarts autopairs
-autocmd vimenter * :call AutoPairsTryInit()
+autocmd vimenter * :call AutoPairsInit()
 let g:AutoPairs = {'(': ')', '[': ']', '{': '}', '<': '>', "'": "'", '"': '"', '`': '`'}
 "nmap <F9> :MinimapToggle<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F7> :Goyo<CR>
 nmap <F6> :NERDTreeToggle<CR>
+nmap <c-w> <c-w><c-w>
 "Goyo/limelight focus config
 autocmd User GoyoEnter Limelight
 autocmd User GoyoLeave Limelight!
 "Enclosing colors
 au VimEnter * RainbowParentheses
-"au BufEnter * :call AutoPairsTryInit()
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
