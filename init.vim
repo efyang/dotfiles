@@ -24,6 +24,7 @@ Plug 'guns/vim-clojure-static', {'for' : 'clojure'}
 Plug 'LaTeX-Box-Team/LaTeX-Box', {'for' : 'LaTeX'}
 Plug 'vitalk/vim-shebang'
 Plug 'cespare/vim-toml', {'for' : 'toml'}
+Plug 'rhysd/rust-doc.vim', {'for': 'rust', 'do' : 'rm -f rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && rm -rf ~/Documents/rust-docs && wget -q https://static.rust-lang.org/dist/rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && tar xf rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && mv rust-docs-nightly-x86_64-unknown-linux-gnu/rust-docs ~/Documents/ && rm -f rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && rm -rf rust-docs-nightly-x86_64-unknown-linux-gnu'}
 " Colorschemes
 "Plug 'godlygeek/csapprox'
 Plug 'bronson/vim-crosshairs'
@@ -31,6 +32,7 @@ Plug 'geoffharcourt/one-dark.vim'
 Plug 'zeis/vim-kolor'
 Plug 'Yggdroot/indentline'
 Plug 'junegunn/seoul256.vim'
+Plug 'rhysd/wallaby.vim'
 " Exterior addons
 Plug 'bling/vim-airline'
 Plug 'ryanss/vim-hackernews', {'on': 'HackerNews'}
@@ -177,7 +179,7 @@ let g:ctrlp_cmd = 'CtrlP'
 "set cursorline
 "setlocal tags=rusty-tags.vi;/,path-to-rust-source-code/rusty-tags.vi
 "autocmd BufWrite *.rs :silent !rusty-tags vi
-
+let g:rust_doc#downloaded_rust_doc_dir = '~/Documents/rust-docs'
 "quit if only quickfix windows left
 aug QFClose
     au!
