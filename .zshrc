@@ -8,7 +8,7 @@ export ZSH=/home/honorabrutroll/.oh-my-zsh
 ZSH_THEME="powerlevel9k/powerlevel9k"
 DEFAULT_USER="honorabrutroll"
 EDITOR=nvim
-
+export VISUAL=nvim
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -81,3 +81,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export PATH=$PATH:/home/honorabrutroll/.nvim/plugged/rust.vim/syntax_checkers/rust/
+
+
+export PATH=/home/honorabrutroll/pi-tools/rust-on-raspberry-pi:/home/honorabrutroll/pi-tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin:$PATH
+export PATH=/home/honorabrutroll/.multirust/toolchains/nightly/cargo/bin:$PATH
+alias reflupdate='sudo reflector --verbose --country 'United States'  -l 5 -p http --sort rate --threads 1 --save /etc/pacman.d/mirrorlist && yaourt -Syy'
+export XDG_CONFIG_HOME=/home/honorabrutroll/.local

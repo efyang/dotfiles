@@ -1,6 +1,6 @@
 "do pip install neovim twisted argparse
 "install ctags
-call plug#begin('~/.nvim/plugged')
+call plug#begin('~/.local/nvim/plugged')
 
 " Languages
 Plug 'pangloss/vim-javascript',{'for' : ['javascript', 'html5', 'html']}
@@ -12,10 +12,11 @@ Plug 'derekwyatt/vim-scala', {'for' : 'scala'}
 Plug 'fatih/vim-go', {'for' : 'go'}
 Plug 'rust-lang/rust.vim', {'for' : 'rust'}
 Plug 'mattn/webapi-vim', {'for' : 'rust'}
-Plug 'phildawes/racer', {'for' : 'rust', 'do' : 'cargo build --release -j8'}
+"Plug 'phildawes/racer', {'for' : 'rust', 'do' : 'cargo build --release -j8'}
+Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py --clang-completer --racer-completer' }
 Plug 'lukerandall/haskellmode-vim', {'for' : 'haskell'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for' : 'cpp'}
-Plug 'Rip-Rip/clang_complete', {'for' : ['c', 'cpp']}
+"Plug 'Rip-Rip/clang_complete', {'for' : ['c', 'cpp']}
 Plug 'ap/vim-css-color', {'for' : ['javascript', 'html5', 'html']}
 Plug 'hail2u/vim-css3-syntax', {'for' : 'css'}
 Plug 'klen/python-mode', {'for' : 'python'}
@@ -68,7 +69,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/limelight.vim', {'on': ['Goyo', 'LimeLight']}
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'}
-Plug 'wikitopian/hardmode'
 " Useful Programs that are mainly for insert mode
 "Plug 'Raimondi/delimitmate'
 "Plug 'kana/vim-smartinput'
@@ -79,6 +79,7 @@ Plug 'honza/vim-snippets'
 
 " All of your Plugs must be added before the following line
 call plug#end()            " required
+let g:plug_timeout = 360 " for YCM
 set nocompatible              " be iMproved, required
 set number
 set backspace=indent,eol,start
@@ -119,6 +120,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
 " Airline config
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -135,7 +137,14 @@ let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
-"set encoding=utf-8
+
+"tabline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+nnoremap <C-l> :bnext<CR>
+nnoremap <C-h> :bprev<CR>
+
 "autostarts NERDTree 
 function StartupFns()
     if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | e
@@ -146,6 +155,7 @@ endfunction
 "autostarts autopairs
 autocmd vimenter * :call AutoPairsInit()
 let g:AutoPairs = {'(': ')', '[': ']', '{': '}', '<': '>', "'": "'", '"': '"', '`': '`'}
+
 "nmap <F9> :MinimapToggle<CR>
 nmap <F10> :CargoBuild<CR>
 nmap <F9> :Autoformat<CR>
@@ -153,6 +163,7 @@ nmap <F8> :TagbarToggle<CR>
 nmap <F7> :Goyo<CR>
 nmap <F6> :NERDTreeToggle<CR>
 nmap <c-w> <c-w><c-w>
+
 "Goyo/limelight focus config
 autocmd User GoyoEnter Limelight
 autocmd User GoyoLeave Limelight!
@@ -203,3 +214,4 @@ let g:tagbar_type_rust = {
 " Set Colorscheme
 colors onedark
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+set clipboard=unnamedplus
