@@ -118,6 +118,7 @@ noremap   <Right>  <NOP>
 " more shebang recognition
 set hidden
 let $RUST_SRC_PATH="/home/honorabrutroll/.local/nvim/plugged/rust/src/"
+let g:ycm_rust_src_path = "/home/honorabrutroll/.local/nvim/plugged/rust/src/"
 AddShebangPattern! lua ^#!.*/bin/env\s\+lua\>
 AddShebangPattern! haskell ^#!.*/bin/env\s\+runhaskell\>
 let g:startify_change_to_dir = '$HOME'
