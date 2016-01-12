@@ -1,5 +1,11 @@
 "do pip install neovim twisted argparse
 "install ctags
+
+if empty(glob('~/.local/nvim/autoload/plug.vim'))
+  silent !curl -fLo "~/.local/nvim/autoload/plug.vim" --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
 call plug#begin('~/.local/nvim/plugged')
 
 " Languages
@@ -12,6 +18,7 @@ Plug 'derekwyatt/vim-scala', {'for' : 'scala'}
 Plug 'fatih/vim-go', {'for' : 'go'}
 Plug 'rust-lang/rust.vim', {'for' : 'rust'}
 Plug 'mattn/webapi-vim', {'for' : 'rust'}
+Plug 'rust-lang/rust', {'for': 'none'}
 "Plug 'phildawes/racer', {'for' : 'rust', 'do' : 'cargo build --release -j8'}
 Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py --clang-completer --racer-completer' }
 Plug 'lukerandall/haskellmode-vim', {'for' : 'haskell'}
@@ -42,6 +49,13 @@ Plug 'mhinz/vim-startify'
 Plug 'joshhartigan/vim-reddit', {'on': 'Reddit'}
 Plug 'chrisbra/Colorizer'
 " Useful Programs
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    !cargo build --release
+    UpdateRemotePlugins
+  endif
+endfunction
+Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 Plug 'floobits/floobits-neovim'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
@@ -103,8 +117,7 @@ noremap   <Right>  <NOP>
 "autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 " more shebang recognition
 set hidden
-let $RUST_SRC_PATH="/home/honorabrutroll/gitproj/rust/src/"
-let g:racer_cmd = "/home/honorabrutroll/.nvim/plugged/racer/target/release/racer"
+let $RUST_SRC_PATH="/home/honorabrutroll/.local/nvim/plugged/rust/src/"
 AddShebangPattern! lua ^#!.*/bin/env\s\+lua\>
 AddShebangPattern! haskell ^#!.*/bin/env\s\+runhaskell\>
 let g:startify_change_to_dir = '$HOME'
@@ -142,8 +155,8 @@ let g:airline_symbols.whitespace = 'Ξ'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-nnoremap <C-l> :bnext<CR>
-nnoremap <C-h> :bprev<CR>
+nnoremap <leader>k :bnext<CR>
+nnoremap <leader>j :bprev<CR>
 
 "autostarts NERDTree 
 function StartupFns()
