@@ -1,7 +1,12 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR
 sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang sakura docky intel-ucode
+yaourt -S firefox-developer freshplayerplugin
+git config --global user.name "Edward Yang"
+git config --global user.email "edward.yang6771@gmail.com"
+git config --global push.default simple
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+git clone "https://github.com/bhilburn/powerlevel9k" "$HOME/.oh-my-zsh/custom/powerlevel9k"
 sudo pip install argparse
 curl -sf https://raw.githubusercontent.com/brson/multirust/master/blastoff.sh | sh
 multirust update nightly
