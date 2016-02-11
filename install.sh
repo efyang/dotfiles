@@ -1,7 +1,10 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR
-sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang sakura docky intel-ucode i3lock i3status dmenu
-yaourt -S firefox-developer freshplayerplugin i3-gaps-next-git
+sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang sakura docky intel-ucode sddm i3lock i3status dmenu
+yaourt -S firefox-developer freshplayerplugin sddm-numix-theme-git i3-gaps-next-git
+sudo ln -s /usr/lib/systemd/system/sddm.service /etc/systemd/system/display-manager.service --force
+sudo sh -c "sddm --example-config > /etc/sddm.conf"
+sudo sh -c 'printf "[Theme]\nCurrent=numix\n" >> /etc/sddm.conf'
 git config --global user.name "Edward Yang"
 git config --global user.email "edward.yang6771@gmail.com"
 git config --global push.default simple
