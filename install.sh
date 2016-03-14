@@ -1,6 +1,6 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR
-sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang sakura docky intel-ucode sddm i3lock i3status
+sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang sakura docky intel-ucode sddm i3lock i3status ibus ibus-sunpinyin
 CC=/usr/bin/clang CXX=/usr/bin/clang++ yaourt -S firefox-developer freshplayerplugin sddm-numix-theme-git i3-gaps-next-git dmenu2 albert atom-bin
 sudo ln -s /usr/lib/systemd/system/sddm.service /etc/systemd/system/display-manager.service --force
 sudo sh -c "sddm --example-config > /etc/sddm.conf"
