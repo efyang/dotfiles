@@ -5,6 +5,7 @@ CC=/usr/bin/clang CXX=/usr/bin/clang++ yaourt -S firefox-developer freshplayerpl
 sudo ln -s /usr/lib/systemd/system/sddm.service /etc/systemd/system/display-manager.service --force
 sudo sh -c "sddm --example-config > /etc/sddm.conf"
 sudo sh -c 'printf "[Theme]\nCurrent=numix\n" >> /etc/sddm.conf'
+sudo timedatectl set-ntp true
 git config --global user.name "Edward Yang"
 git config --global user.email "edward.yang6771@gmail.com"
 git config --global push.default simple
