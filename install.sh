@@ -1,6 +1,6 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR
-sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang sakura docky intel-ucode sddm i3lock i3status ibus ibus-sunpinyin
+sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang sakura docky intel-ucode sddm i3lock i3status ibus ibus-sunpinyin graphviz
 CC=/usr/bin/clang CXX=/usr/bin/clang++ yaourt -S firefox-developer freshplayerplugin sddm-numix-theme-git i3-gaps-next-git dmenu2 albert atom-bin
 sudo ln -s /usr/lib/systemd/system/sddm.service /etc/systemd/system/display-manager.service --force
 sudo sh -c "sddm --example-config > /etc/sddm.conf"
@@ -15,6 +15,8 @@ curl -sf https://raw.githubusercontent.com/brson/multirust/master/blastoff.sh | 
 multirust update nightly
 multirust update stable
 multirust default nightly
+cargo install cargo-edit
+cargo install cargo-graph
 cp ".zshrc" "$HOME/.zshrc" -f
 cp ".conkyrc" "$HOME/.conkyrc" -f
 mkdir -p "$HOME/.local/nvim"
