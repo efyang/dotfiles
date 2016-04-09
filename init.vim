@@ -1,9 +1,9 @@
 "do pip install neovim twisted argparse
 "install ctags
 
-if empty(glob('~/.local/nvim/autoload/plug.vim'))
-  silent !curl -fLo "~/.local/nvim/autoload/plug.vim" --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo "~/.config/nvim/autoload/plug.vim" --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  autocmd VimEnter * PlugInstall | source "~/.config/nvim/init.vim"
 endif
 
 call plug#begin('~/.local/nvim/plugged')
@@ -19,11 +19,9 @@ Plug 'fatih/vim-go', {'for' : 'go'}
 Plug 'rust-lang/rust.vim', {'for' : 'rust'}
 Plug 'mattn/webapi-vim', {'for' : 'rust'}
 Plug 'rust-lang/rust', {'for': 'none'}
-"Plug 'phildawes/racer', {'for' : 'rust', 'do' : 'cargo build --release -j8'}
-Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py --clang-completer --racer-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': 'YCM_CORES = 2 python2 ./install.py --clang-completer --racer-completer' }
 Plug 'lukerandall/haskellmode-vim', {'for' : 'haskell'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for' : 'cpp'}
-"Plug 'Rip-Rip/clang_complete', {'for' : ['c', 'cpp']}
 Plug 'ap/vim-css-color', {'for' : ['javascript', 'html5', 'html']}
 Plug 'hail2u/vim-css3-syntax', {'for' : 'css'}
 Plug 'klen/python-mode', {'for' : 'python'}
@@ -34,7 +32,6 @@ Plug 'vitalk/vim-shebang'
 Plug 'cespare/vim-toml', {'for' : 'toml'}
 Plug 'rhysd/rust-doc.vim', {'for': 'rust', 'do' : 'rm -f rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && rm -rf ~/Documents/rust-docs && wget -q https://static.rust-lang.org/dist/rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && tar xf rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && mv rust-docs-nightly-x86_64-unknown-linux-gnu/rust-docs ~/Documents/ && rm -f rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && rm -rf rust-docs-nightly-x86_64-unknown-linux-gnu'}
 " Colorschemes
-"Plug 'godlygeek/csapprox'
 Plug 'bronson/vim-crosshairs'
 Plug 'geoffharcourt/one-dark.vim'
 Plug 'zeis/vim-kolor'
@@ -117,8 +114,8 @@ noremap   <Right>  <NOP>
 "autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 " more shebang recognition
 set hidden
-let $RUST_SRC_PATH="/home/honorabrutroll/.local/nvim/plugged/rust/src/"
-let g:ycm_rust_src_path = "/home/honorabrutroll/.local/nvim/plugged/rust/src/"
+let $RUST_SRC_PATH="$HOME/.config/nvim/plugged/rust/src/"
+let g:ycm_rust_src_path = "$HOME/.config/nvim/plugged/rust/src/"
 AddShebangPattern! lua ^#!.*/bin/env\s\+lua\>
 AddShebangPattern! haskell ^#!.*/bin/env\s\+runhaskell\>
 let g:startify_change_to_dir = '$HOME'
@@ -204,7 +201,7 @@ let g:ctrlp_cmd = 'CtrlP'
 "set cursorline
 "setlocal tags=rusty-tags.vi;/,path-to-rust-source-code/rusty-tags.vi
 "autocmd BufWrite *.rs :silent !rusty-tags vi
-let g:rust_doc#downloaded_rust_doc_dir = '~/Documents/rust-docs'
+let g:rust_doc#downloaded_rust_doc_dir = '$HOME/Documents/rust-docs'
 "quit if only quickfix windows left
 aug QFClose
     au!

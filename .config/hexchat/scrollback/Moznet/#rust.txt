@@ -1,0 +1,641 @@
+T 1453100017 2<20Quxxy2>	tmerr: What about ひらがな?
+T 1453100031 2<20Quxxy2>	What does *that* translate to?
+T 1453100031 2<26tmerr2>	Looks like U5N2 to me :P
+T 1453100042 2<26tmerr2>	It doesn't have to be that intelligent I'd just like to remove accents
+T 1453100049 <10-11-	ansible1 has quit 14(Ping timeout: 121 seconds14)
+T 1453100058 2<20Quxxy2>	Why?
+T 1453100066 <10-11-	mpark has quit 14(Ping timeout: 121 seconds14)
+T 1453100067 <10-11-	skade has quit 14(Ping timeout: 121 seconds14)
+T 1453100115 -10-11>	fyolnish 14(10fyolnish@moz-jqsevj.ucom.ne.jp14) has joined #rust
+T 1453100124 2<26tmerr2>	I have unicode text I need to send to a server, but that server only takes characters in the ascii range.
+T 1453100131 2<26tmerr2>	(And I have no control over it)
+T 1453100138 2<27Screwtape2>	tmerr: SHA1-hash them and send the hex digest!
+T 1453100141 2<25Mutabah2>	tmerr: What will happen to this text?
+T 1453100151 -10-11>	nicoch_ 14(10nicoch@moz-vnm.i7v.217.78.IP14) has joined #rust
+T 1453100158 2<25Mutabah2>	tmerr: Could you instead URL-encode, or something similar?
+T 1453100174 2<28niconii2>	you could use UTF-7 maybe
+T 1453100179 2<26tmerr2>	I'm working on a CTF challenge :P
+T 1453100202 2<20Quxxy2>	Replace everything outside of ASCII with "?", perhaps?
+T 1453100206 <10-11-	fyolnish has quit 14(Connection closed14)
+T 1453100215 2<20Quxxy2>	You could decompose the text and then strip out combining codepoints
+T 1453100247 2<26tmerr2>	So the server requests the name of a country, which I have including accents, and I need to keep the name correct, just without the accents
+T 1453100267 2<26tmerr2>	I *think*. Can't say I'm 100% sure what this server's doing.
+T 1453100270 -10-11>	todos 14(10todos@moz-gu3.6lo.44.194.IP14) has joined #rust
+T 1453100292 -10-11>	mpark 14(10mpark@moz-tccb1o.wa.comcast.net14) has joined #rust
+T 1453100294 <10-11-	thesnowdog has quit 14(Connection closed14)
+T 1453100299 -10-11>	rakm 14(10rakm@moz-5b171d.ca.comcast.net14) has joined #rust
+T 1453100303 2<26tmerr2>	It doesn't sound like it's simple, that's alright
+T 1453100308 2<20Quxxy2>	The most proper-est thing is probably to just have a table that maps the characters
+T 1453100312 2<25Mutabah2>	tmerr: If that's the case, map the string by `char`, stripping out unknown characters and replacing known accented characters with the unaccented version
+T 1453100316 2<20Quxxy2>	And explode if you see anything else
+T 1453100325 -10-11>	drasa 14(10drasa@moz-baqglg.ap.nuro.jp14) has joined #rust
+T 1453100354 2<25Mutabah2>	yep
+T 1453100364 -10-11>	tmtwd 14(10tmtwd@moz-0kkm5n.cable.rogers.com14) has joined #rust
+T 1453100366 2<25Mutabah2>	or silently ignore it and let the server explode and error
+T 1453100373 2<20Quxxy2>	That or use https://crates.io/crates/unicode-normalization/ to get the nfd form of the string, and drop anything that isn't ASCII
+T 1453100410 2<25Mutabah2>	actually, that's likely the best (as it avoids having to manually decompose characters)
+T 1453100413 -10-11>	hannelita 14(10hannelita@moz-tt35e2.3jhb.7afs.014c.2804.IP14) has joined #rust
+T 1453100426 <10-11-	mpark has quit 14(Connection closed14)
+T 1453100446 2<20Quxxy2>	Mmm... because é and é are different strings
+T 1453100472 2<19zokier`2>	nfkd might be better than nfd 
+T 1453100578 -10-11>	thesnowdog 14(10doug@moz-cb3.eku.181.180.IP14) has joined #rust
+T 1453100578 <10-11-	drasa has quit 14(Ping timeout: 121 seconds14)
+T 1453100579 <10-11-	Lunatrius has quit 14(Ping timeout: 121 seconds14)
+T 1453100591 <10-11-	thorns999 has quit 14(Quit: http://www.kiwiirc.com/ - A hand crafted IRC client14)
+T 1453100641 -10-11>	mpark 14(10mpark@moz-tccb1o.wa.comcast.net14) has joined #rust
+T 1453100652 <10-11-	urodna has quit 14(Client exited14)
+T 1453100715 <10-11-	hannelita has quit 14(Ping timeout: 121 seconds14)
+T 1453100766 <10-11-	nicoch_ has quit 14(Quit: *poof*14)
+T 1453100770 <10-11-	tmtwd has quit 14(Ping timeout: 121 seconds14)
+T 1453100934 -10-11>	xiinotulp 14(10q@moz-nfn8in.dynamic.totbb.net14) has joined #rust
+T 1453100934 <10-11-	mpark has quit 14(Quit: My Mac has gone to sleep. ZZZzzz…14)
+T 1453100934 -10-11>	vmx 14(10vmx@moz-apru1c.dip0.t-ipconnect.de14) has joined #rust
+T 1453100934 -10-11>	mpark 14(10mpark@moz-tccb1o.wa.comcast.net14) has joined #rust
+T 1453100934 2<26tmerr2>	Ahhhh that makes sense. So from what I am gathering unicode has multiple ways of representing the same thing. By choosing NKFD it separates out accents as their own characters, which can then be stripped away?
+T 1453100934 <10-11-	badon has quit 14(Ping timeout: 121 seconds14)
+T 1453100950 2<25Mutabah2>	tmerr: Yep
+T 1453100996 <10-11-	plutoniix has quit 14(Ping timeout: 121 seconds14)
+T 1453101046 <10-11-	mpark has quit 14(Quit: My Mac has gone to sleep. ZZZzzz…14)
+T 1453101107 -10-11>	OmniMancer1 14(10omnimancer@moz-qq6.qd3.149.118.IP14) has joined #rust
+T 1453101107 <10-11-	OmniMancer has quit 14(Connection closed14)
+T 1453101165 -10-11>	cruor99 14(10cruor99@moz-0os33h.customer.cdi.no14) has joined #rust
+T 1453101186 <10-11-	staticassert2 has quit 14(Quit: http://www.mibbit.com ajax IRC Client14)
+T 1453101294 2<26tmerr2>	perfect, appreciate the help
+T 1453101315 -10-11-	NameNotFound is now known as zz_NameNotFound
+T 1453101373 -10-11>	mpark 14(10mpark@moz-tccb1o.wa.comcast.net14) has joined #rust
+T 1453101394 <10-11-	}ls{ has quit 14(Ping timeout: 121 seconds14)
+T 1453101407 <10-11-	cruor99 has quit 14(Ping timeout: 121 seconds14)
+T 1453101436 -10-11>	Andoriyu 14(10Andoriyu@moz-a9o6ej.res.rr.com14) has joined #rust
+T 1453101477 -10-11>	skade 14(10skade@moz-lu4c2f.web.vodafone.de14) has joined #rust
+T 1453101527 -10-11>	fabiand 14(10fabiand@moz-dlddlf.dip0.t-ipconnect.de14) has joined #rust
+T 1453101528 <10-11-	skade has quit 14(Quit: My MacBook Pro has gone to sleep. ZZZzzz…14)
+T 1453101532 -10-11>	skade 14(10skade@moz-lu4c2f.web.vodafone.de14) has joined #rust
+T 1453101533 <10-11-	makoLine has quit 14(Ping timeout: 121 seconds14)
+T 1453101542 <10-11-	skade has quit 14(Quit: My MacBook Pro has gone to sleep. ZZZzzz…14)
+T 1453101703 -10-11>	iiddnn_ 14(10iacopodeeno@moz-36rg3s.retail.telecomitalia.it14) has joined #rust
+T 1453101865 -10-11>	Eisfreak7 14(10Eisfreak7@moz-pqpfkj.pools.vodafone-ip.de14) has joined #rust
+T 1453101888 -10-11>	jdnavarro 14(10danny@moz-f1nmro.dynamicIP.rima-tde.net14) has joined #rust
+T 1453101918 2<22WindowsBunny2>	I wonder if there are accented characters that don't have a form of ascii character + combining character
+T 1453101928 -10-11>	fyolnish 14(10fyolnish@moz-jqsevj.ucom.ne.jp14) has joined #rust
+T 1453101951 -10-11>	drasa 14(10drasa@moz-baqglg.ap.nuro.jp14) has joined #rust
+T 1453101959 2<22WindowsBunny2>	I'm pretty sure there's a proper unicode way to get the base latin character of something
+T 1453101965 2<22WindowsBunny2>	maybe, I hope so
+T 1453102096 <10-11-	mpark has quit 14(Connection closed14)
+T 1453102110 -10-11>	pengowen 14(10Mibbit@moz-jg1cul.ph.cox.net14) has joined #rust
+T 1453102197 <10-11-	drasa has quit 14(Ping timeout: 121 seconds14)
+T 1453102300 -10-11>	makoLine 14(10mako@moz-f9dvuh.flip.co.nz14) has joined #rust
+T 1453102301 -10-11>	frankmcsherry 14(10frankmcsher@moz-vi2ap8.tep.ch14) has joined #rust
+T 1453102325 <10-11-	masood has quit 14(Ping timeout: 121 seconds14)
+T 1453102388 <10-11-	mgottschlag has quit 14(Ping timeout: 121 seconds14)
+T 1453102407 -10-11>	mpark 14(10mpark@moz-tccb1o.wa.comcast.net14) has joined #rust
+T 1453102451 <10-11-	durka42 has quit 14(Client exited14)
+T 1453102469 <10-11-	Andoriyu has quit 14(Quit: My MacBook Pro has gone to sleep. ZZZzzz…14)
+T 1453102478 -10-11>	mou 14(10donwilliam@moz-82l.vs1.228.188.IP14) has joined #rust
+T 1453102496 2<24pengowen2>	I come here often enough to make an account, but every username I try is either invalid or taken
+T 1453102509 <10-11-	starblue1 has quit 14(Ping timeout: 121 seconds14)
+T 1453102521 2<24pengowen2>	Sorry if this is off topic but I need some help
+T 1453102553 <10-11-	mpark has quit 14(Quit: My Mac has gone to sleep. ZZZzzz…14)
+T 1453102558 -10-11>	mpark 14(10mpark@moz-tccb1o.wa.comcast.net14) has joined #rust
+T 1453102569 -10-11>	Andoriyu 14(10Andoriyu@moz-a9o6ej.res.rr.com14) has joined #rust
+T 1453102589 2<28niconii2>	pengowen: hmm?
+T 1453102627 -10-11>	masood 14(10Masood@moz-nmuf16.elitebnc.org14) has joined #rust
+T 1453102635 2<24pengowen2>	I can't create a mibbit account because every username is taken
+T 1453102694 2<24pengowen2>	I used a string generator and I finally got one that works, but I don't think I can remember it
+T 1453102719 2<28niconii2>	uhh, keep in mind mibbit is just one of many many ways to connect to IRC
+T 1453102724 -10-11>	firstdayonthejob 14(10firstdayont@moz-bipmqq.cable.virginm.net14) has joined #rust
+T 1453102792 -10-11>	yw 14(10yw@moz-2hrqlc.tpgi.com.au14) has joined #rust
+T 1453102824 <10-11-	vadix has quit 14(Ping timeout: 121 seconds14)
+T 1453102859 -10-11>	vadix 14(10vadix@moz-ivi2f8.f644.2q8d.05c1.2601.IP14) has joined #rust
+T 1453102872 2<28niconii2>	erm, how do i explain this
+T 1453102875 -10-11>	thiblahute_ 14(10tsaunier@moz-68f5rr.rev.sfr.net14) has joined #rust
+T 1453102907 2<28niconii2>	so, IRC is a chat protocol, and there are a lot of IRC servers and networks out there
+T 1453102910 2<25Mutabah2>	pengowen: Did you have a rust-related question? Or were you asking about nickname avaliablity on this server / on mibbit
+T 1453102921 2<28niconii2>	you're currently connected to mozilla's IRC network
+T 1453103002 2<28niconii2>	you can connect to an IRC server in a number of ways, mibbit is just one of those ways
+T 1453103012 2<28niconii2>	but we're not affiliated with mibbit at all
+T 1453103119 2<28niconii2>	our site links to mibbit just because it's an easy way to connect to IRC without having to download and set up a client or anything like that
+T 1453103178 <10-11-	ahihi has quit 14(Ping timeout: 121 seconds14)
+T 1453103195 -10-11>	test32321 14(10test@moz-tje7vi.vps.tagadab.com14) has joined #rust
+T 1453103200 -10-11>	zeroprime 14(10slentzen@moz-u5tqjl.reverse.mdcc-fun.de14) has joined #rust
+T 1453103202 -10-11>	nicholasf 14(10nicholasf@moz-e9m.r87.56.45.IP14) has joined #rust
+T 1453103206 <10-11-	zeroprime has quit 14(Connection closed14)
+T 1453103258 <10-11-	Splat has quit 14(Quit: Bye14)
+T 1453103280 <10-11-	fyolnish has quit 14(Connection closed14)
+T 1453103325 -10-11>	fyolnish 14(10fyolnish@moz-jqsevj.ucom.ne.jp14) has joined #rust
+T 1453103343 <10-11-	fyolnish has quit 14(Connection closed14)
+T 1453103346 -10-11>	fyolnish 14(10fyolnish@moz-jqsevj.ucom.ne.jp14) has joined #rust
+T 1453103353 <10-11-	masood has quit 14(Ping timeout: 121 seconds14)
+T 1453103507 -10-11>	anty 14(10anty@moz-5oio2r.vpn.lrz.de14) has joined #rust
+T 1453103531 -10-11>	SneakySnake 14(10snake@moz-i9is4u.pool.telekom.hu14) has joined #rust
+T 1453103580 -10-11>	drasa 14(10drasa@moz-baqglg.ap.nuro.jp14) has joined #rust
+T 1453103586 -10-11>	starblue 14(10juergen@moz-pi95j6.pools.vodafone-ip.de14) has joined #rust
+T 1453103613 <10-11-	narann has quit 14(Quit: Leaving14)
+T 1453103628 -10-11>	masood 14(10Masood@moz-nmuf16.elitebnc.org14) has joined #rust
+T 1453103717 <10-11-	gondi has quit 14(Connection closed14)
+T 1453103778 -10-11>	gondi 14(10gondi@moz-gnc.q7q.136.41.IP14) has joined #rust
+T 1453103804 <10-11-	adu has quit 14(Client exited14)
+T 1453103818 -10-11>	dmilith 14(10dmilith@moz-8dkrre.interkar.pl14) has joined #rust
+T 1453103827 <10-11-	drasa has quit 14(Ping timeout: 121 seconds14)
+T 1453103857 -10-11>	Pierre_M 14(10Pierre_M@moz-rump8q.slkc.qwest.net14) has joined #rust
+T 1453104046 <10-11-	arBmind has quit 14(Quit: Leaving.14)
+T 1453104055 -10-11>	tm 14(10tm@moz-j3ht7j.dynamic.chello.pl14) has joined #rust
+T 1453104081 -10-11>	mvyskocil 14(10mvyskocil@moz-i38jah.net.upcbroadband.cz14) has joined #rust
+T 1453104093 <10-11-	iiddnn_ has quit 14(Connection closed14)
+T 1453104104 -10-11>	iiddnn__ 14(10iacopodeeno@moz-36rg3s.retail.telecomitalia.it14) has joined #rust
+T 1453104108 -10-11-	iiddnn__ is now known as iiddnn_
+T 1453104125 2<24pengowen2>	I got my account working
+T 1453104134 -10-11>	hannelita 14(10hannelita@moz-7b9.1bq.181.191.IP14) has joined #rust
+T 1453104182 -10-11>	pbor 14(10paolo@moz-b3skbv.retail.telecomitalia.it14) has joined #rust
+T 1453104195 2<22JustAPerson2>	tomaka: are you online? what version of rust does cpal track?
+T 1453104218 2<24pengowen2>	If I want to make a usize, should I use let x: usize = 0, or let x = 0usize?
+T 1453104219 -10-11>	rzlourenco 14(10rzl@moz-cb8lfm.l2f.inesc-id.pt14) has joined #rust
+T 1453104221 2<28tomaka2>	JustAPerson: I don't know, probably 1.3 or 1.4 I guess
+T 1453104229 2<28tomaka2>	since it hasn't receive big modifications in a while
+T 1453104239 -10-11>	gopar 14(10gopar@moz-5d354a.r89q.rq9c.0642.2601.IP14) has joined #rust
+T 1453104252 2<25Mutabah2>	pengowen: Usually just let it infer
+T 1453104263 2<25Mutabah2>	pengowen: However, if an annotation is required, I'
+T 1453104269 2<25Mutabah2>	I'm partial to the first version
+T 1453104283 -10-11>	jdietrich 14(10jdietrich@moz-0au.qkc.70.109.IP14) has joined #rust
+T 1453104376 <10-11-	hannelita has quit 14(Ping timeout: 121 seconds14)
+T 1453104452 <10-11-	eckhardt has quit 14(Quit: Leaving...14)
+T 1453104461 <10-11-	rzlourenco has quit 14(Ping timeout: 121 seconds14)
+T 1453104466 -10-11>	dmac__ 14(10dmac@moz-bufok7.ca.comcast.net14) has joined #rust
+T 1453104547 -10-11>	Andris_zbx 14(10andris@moz-9cq.e6i.110.87.IP14) has joined #rust
+T 1453104550 -10-11>	laumann 14(10thomas@moz-3m6.3kq.109.2.IP14) has joined #rust
+T 1453104656 <10-11-	Eisfreak7 has quit 14(Quit: WeeChat 1.314)
+T 1453104714 <10-11-	dmac__ has quit 14(Ping timeout: 121 seconds14)
+T 1453104724 -10-11>	tennix 14(10tennix@moz-kjb.7qo.39.106.IP14) has joined #rust
+T 1453104763 2<22JustAPerson2>	tomaka: it appears that cpal uses the wrong version of coreaudio in its cargo.toml?
+T 1453104786 2<28tomaka2>	ah
+T 1453104814 2<28tomaka2>	I don't have a mac, so most of my libs don't work well on os/x
+T 1453104827 <10-11-	tinaun_ has quit 14(Quit: 14)
+T 1453104845 2<22JustAPerson2>	is there a way to override the version used by cpal?
+T 1453104850 <10-11-	pengowen has quit 14(Quit: http://www.mibbit.com ajax IRC Client14)
+T 1453104858 -10-11>	J_Arcane 14(10chatzilla@moz-l0ova8.bb.dnainternet.fi14) has joined #rust
+T 1453104871 -10-11>	oli_obk_ 14(10smuxi@moz-uhi.0sb.52.141.IP14) has joined #rust
+T 1453104942 -10-11>	mindtree 14(10Mitch@moz-4p8kmq.iprimus.net.au14) has joined #rust
+T 1453104968 <10-11-	thiblahute_ has quit 14(Ping timeout: 121 seconds14)
+T 1453105184 -10-11>	arBmind 14(10Andreas@moz-lka49d.dyn.telefonica.de14) has joined #rust
+T 1453105205 -10-11>	drasa 14(10drasa@moz-baqglg.ap.nuro.jp14) has joined #rust
+T 1453105281 -10-11>	kmicu 14(10kmicu@moz-uga.edn.218.91.IP14) has joined #rust
+T 1453105321 -10-11>	orks 14(10orks@moz-jc6.lgg.84.93.IP14) has joined #rust
+T 1453105451 <10-11-	drasa has quit 14(Ping timeout: 121 seconds14)
+T 1453105528 -10-11>	killercup 14(10killercup@moz-4udt1b.dip0.t-ipconnect.de14) has joined #rust
+T 1453105704 -10-11>	cruor99 14(10cruor99@moz-0os33h.customer.cdi.no14) has joined #rust
+T 1453105711 <10-11-	SiegeLord has quit 14(Quit: It's a joke, it's all a joke.14)
+T 1453105757 <10-11-	graycoder has quit 14(Ping timeout: 121 seconds14)
+T 1453105777 <10-11-	zrneely has quit 14(Ping timeout: 121 seconds14)
+T 1453105871 -10-11>	drasa 14(10drasa@moz-baqglg.ap.nuro.jp14) has joined #rust
+T 1453105894 <10-11-	J_Arcane has quit 14(Ping timeout: 121 seconds14)
+T 1453105985 <10-11-	tycoon177 has quit 14(Connection closed14)
+T 1453105994 -10-11>	shellac_ 14(10textual@moz-dt7eki.cable.virginm.net14) has joined #rust
+T 1453106003 -10-11>	dzbarsky 14(10Adium@moz-nlge93.82pc.j76f.0646.2601.IP14) has joined #rust
+T 1453106013 <10-11-	tikue_ has quit 14(Connection closed14)
+T 1453106037 -10-11>	Regexident 14(10regexident@moz-0t2du6.dip0.t-ipconnect.de14) has joined #rust
+T 1453106054 -10-11>	Ms2ger 14(10Ms2ger@moz-nbsg4n.access.telenet.be14) has joined #rust
+T 1453106118 2<20hsivonen2>	I had some calls to std::slice::from_raw_parts in my lib.rs, and it compiled without any "use" lines for that stuff. 
+T 1453106167 2<20hsivonen2>	then I moved those calls to an ffi.rs and added mod ffi; to my lib.rs and now the compiler can't resolve std::slice::from_raw_parts even if I try to add obvious "use" lines
+T 1453106168 -10-11>	mgottschlag 14(10quassel@moz-dissdh.h71g.nb65.1398.2a00.IP14) has joined #rust
+T 1453106176 <10-11-	SneakySnake has quit 14(Quit: Leaving14)
+T 1453106179 2<20hsivonen2>	what am I missing?
+T 1453106189 -10-11>	tikue 14(10tikue@moz-jf56iq.ca.comcast.net14) has joined #rust
+T 1453106204 <10-11-	firstdayonthejob has quit 14(Ping timeout: 121 seconds14)
+T 1453106229 2<25Mutabah2>	hsivonen: All paths (outside of `use`) are relative to the current module
+T 1453106253 2<25Mutabah2>	hsivonen: It originally worked because there's an implicit `extern crate std;` in the root of your crate
+T 1453106269 2<25Mutabah2>	hsivonen: either do ::std::... or have `use std;` at the top of the module
+T 1453106293 2<25Mutabah2>	(it's better to use the `::std` form in all cases)
+T 1453106307 2<20hsivonen2>	Mutabah: thanks!
+T 1453106450 <10-11-	fyolnish has quit 14(Connection closed14)
+T 1453106455 -10-11>	ksad 14(10ksad@moz-p8ccku.hqcu.6p3s.0660.2001.IP14) has joined #rust
+T 1453106455 <10-11-	the_nozzle has quit 14(Ping timeout: 121 seconds14)
+T 1453106571 2<22Ms2ger2>	Morning hsivonen 
+T 1453106579 <10-11-	scriptor has quit 14(Connection closed14)
+T 1453106591 2<20hsivonen2>	Ms2ger: good morning
+T 1453106610 -10-11>	scriptor 14(10scriptor@moz-19q800.res.rr.com14) has joined #rust
+T 1453106641 -10-11>	fyolnish 14(10fyolnish@moz-jqsevj.ucom.ne.jp14) has joined #rust
+T 1453106646 <10-11-	fyolnish has quit 14(Connection closed14)
+T 1453106647 -10-11>	fyolnish 14(10fyolnish@moz-jqsevj.ucom.ne.jp14) has joined #rust
+T 1453106706 2<27ubsan2>	hsivonen, you have a cool name
+T 1453106779 <10-11-	LRN has quit 14(Ping timeout: 121 seconds14)
+T 1453106786 2<22Ms2ger2>	"An &self" or "A &self"?
+T 1453106806 -10-11>	LRN 14(10Miranda@moz-63ipbh.nationalcablenetworks.ru14) has joined #rust
+T 1453106814 <10-11-	vadix has quit 14(Ping timeout: 121 seconds14)
+T 1453106852 <10-11-	scriptor has quit 14(Ping timeout: 121 seconds14)
+T 1453106880 -10-11>	rzlourenco 14(10rzl@moz-cb8lfm.l2f.inesc-id.pt14) has joined #rust
+T 1453106887 <10-11-	ubsan_ has quit 14(Quit: <314)
+T 1453106949 <10-11-	Regexident has quit 14(Ping timeout: 121 seconds14)
+T 1453106960 2<27tikue2>	Ms2ger: I say "an and-self"
+T 1453106975 -10-11>	mkoskar 14(10mkoskar@moz-f7r9kh.t7od.j6um.3b40.2a03.IP14) has joined #rust
+T 1453106991 2<26tmerr2>	is there no function to escape strings used to make a regex pattern?
+T 1453106998 2<22Ms2ger2>	That's what I was going to use too, so that's good enough for me :)
+T 1453107006 2<27tikue2>	;P
+T 1453107024 2<27tikue2>	tmerr: you can use raw strings
+T 1453107026 2<26tmerr2>	herp
+T 1453107033 2<26tmerr2>	nevermind i found it
+T 1453107045 2<26tmerr2>	regex::quote
+T 1453107060 -10-11>	seriyPS 14(10seriy@moz-rtl.1a0.172.178.IP14) has joined #rust
+T 1453107211 -10-11>	Shtong 14(10realshtong@moz-o0ints.abo.wanadoo.fr14) has joined #rust
+T 1453107282 -10-11>	bitshifternz 14(10bitshiftern@moz-nqgbo4.tpgi.com.au14) has joined #rust
+T 1453107409 <10-11-	vikaton has quit 14(Quit: Connection closed for inactivity14)
+T 1453107525 -10-11>	hannelita 14(10hannelita@moz-5ot653.3jhb.7afs.014c.2804.IP14) has joined #rust
+T 1453107526 <10-11-	gondi has quit 14(Connection closed14)
+T 1453107568 <10-11-	tripped has quit 14(Quit: Konversation terminated!14)
+T 1453107606 -10-11>	gondi 14(10gondi@moz-gnc.q7q.136.41.IP14) has joined #rust
+T 1453107662 -10-11>	djcb 14(10user@moz-ptk.tnt.157.194.IP14) has joined #rust
+T 1453107710 <10-11-	shellac_ has quit 14(Quit: My MacBook Pro has gone to sleep. ZZZzzz…14)
+T 1453107740 -10-11>	thorns999 14(10thorns999@moz-m6e6jd.pppoe-dhcp.cipherkey.net14) has joined #rust
+T 1453107773 <10-11-	frankmcsherry has quit 14(Connection closed14)
+T 1453107834 <10-11-	thorns999 has quit 14(Quit: http://www.kiwiirc.com/ - A hand crafted IRC client14)
+T 1457583882 -10-11>	You are now talking on 11#rust
+T 1457583882 -10-11-	Topic for 11#rust is 11Rust general discussion | Current release: 1.7 | | Playground https://play.rust-lang.org/ | Forum  https://users.rust-lang.org/ | New user channel: #rust-beginners  | Conduct https://www.rust-lang.org/conduct.html | Logs  https://botbot.me/mozilla/rust
+T 1457583882 -10-11-	Topic for 11#rust set by 11steveklabnik!root@moz-fft.uo8.55.45.IP at 11Thu Mar  3 13:09:14 2016
+T 1457583914 6<honorabrutroll6>	Is there any way to detect if a C function exists at runtime through FFI?
+T 1457583923 <10-11-	makoLine has quit 14(Ping timeout: 121 seconds14)
+T 1457583932 <10-11-	ixti has quit 14(Ping timeout: 121 seconds14)
+T 1457583939 2<20forgottenone2>	niconii: i was reading piston-conrod method and there were methods should not be overriden when implementing widget, so i just wanted to ask
+T 1457583940 -10-11>	insaneinside 14(10user@moz-kdoh08.customer.broadstripe.net14) has joined #rust
+T 1457583953 2<28niconii2>	forgottenone: ahh
+T 1457584005 2<20forgottenone2>	sorry i meant piston-conrod document not piston-conrod method
+T 1457584086 2<25bluss2>	forgottenone: you can do something similar with extension traits. For example ToString extends Display
+T 1457584100 2<25bluss2>	and .to_string() can not be overridden
+T 1457584104 -10-11>	dmac 14(10dmac@moz-2ig65r.ca.comcast.net14) has joined #rust
+T 1457584172 2<28durka422>	what about specialization?
+T 1457584191 2<25bluss2>	the ToString trait needs to opt in to be specialized
+T 1457584195 2<8WindowsBunny2>	honorabrutroll: You'd have to use dynamic library loading
+T 1457584196 2<8insaneinside2>	honorabrutroll: you're looking for something like `dlsym` <http://pubs.opengroup.org/onlinepubs/009695399/functions/dlsym.html>, right?
+T 1457584208 2<22WindowsBunny2>	insaneinside: Except cross platform I hope :P
+T 1457584209 2<28durka422>	ah
+T 1457584214 2<26insaneinside2>	WindowsBunny: yah
+T 1457584226 2<19dcb2>	what is the big-oh complexity of str::is_char_boundary?
+T 1457584234 2<25bluss2>	dcb: O(1)
+T 1457584238 2<22WindowsBunny2>	!crate libloading
+T 1457584238 2<25rustbot2>	libloading (0.2.1) - A safer binding to platform’s dynamic library loading utilities -> https://crates.io/crates/libloading
+T 1457584240 2<19dcb2>	bluss: thanks
+T 1457584243 2<26insaneinside2>	WindowsBunny: the problem with "FFI" in Rust is that the functions aren't truly foreign!
+T 1457584254 2<28niconii2>	WindowsBunny: well, i imagine they would be, or else there's no reason to check at runtime rather than compile time
+T 1457584273 2<28durka422>	so when do we get to go looking through std for traits to make default? :)
+T 1457584274 <10-11-	dmac___ has quit 14(Ping timeout: 121 seconds14)
+T 1457584287 2<22WindowsBunny2>	niconii: I meant using something like libloading instead of dlsym directly :P
+T 1457584296 2<28niconii2>	WindowsBunny: ahh
+T 1457584304 2<26insaneinside2>	durka42: all the traits, all the time! :D
+T 1457584365 2<28durka422>	well presumably ToString anyway
+T 1457584377 2<20forgottenone2>	bluss: i thought that may be current solution, but we have to wait impl specialization rfc for real non overridable methods
+T 1457584380 -10-11>	demilux 14(10demilux@moz-73qa6c.wa.comcast.net14) has joined #rust
+T 1457584381 2<20forgottenone2>	thx
+T 1457584389 2<28durka422>	because if we get specialization but we can't specialize String::to_string... then we're doing it wrong
+T 1457584400 <10-11-	demilux has quit 14(A TLS packet with unexpected length was received.14)
+T 1457584417 2<25bluss2>	hehe so much focus on .to_string(), it can't be that important
+T 1457584435 <10-11-	heepster 14(kevin@moz-mqeh0c.res.rr.com14) has left #rust 14("WeeChat 1.4"14)
+T 1457584450 2<28durka422>	it's a heuristic for "you'll be able to specialize things you would want to specialize"
+T 1457584467 -10-11>	sub_pop 14(10link@moz-cvs6b6.ca.comcast.net14) has joined #rust
+T 1457584479 2<28durka422>	also it's the poster child
+T 1457584482 2<28durka422>	for better or worse
+T 1457584482 2<25bluss2>	please think of .zip()s of the world, they need your support
+T 1457584486 <10-11-	sub_pop has quit 14(Client exited14)
+T 1457584487 -10-11>	sub_pop_ 14(10link@moz-cvs6b6.ca.comcast.net14) has joined #rust
+T 1457584489 -10-11-	sub_pop_ is now known as sub_pop
+T 1457584510 <10-11-	dmilith has quit 14(Quit: My Mac has gone to sleep. ZZZzzz…14)
+T 1457584562 -10-11>	shanemcd 14(10shanemcd@moz-3dreq3.uekj.7vno.030a.2602.IP14) has joined #rust
+T 1457584566 6<honorabrutroll6>	Hmm, should work. Thanks!
+T 1457584670 -10-11>	makoLine 14(10mako@moz-d0acpm.flip.co.nz14) has joined #rust
+T 1457584680 <10-11-	scriptor has quit 14(Connection closed14)
+T 1457584681 -10-11>	woboats 14(10woboats@moz-8rajde.ca.comcast.net14) has joined #rust
+T 1457584701 -10-11>	scriptor 14(10scriptor@moz-19q800.res.rr.com14) has joined #rust
+T 1457584719 -10-11>	ansible1 14(10kvirc@moz-ks4ued.co.comcast.net14) has joined #rust
+T 1457584751 -10-11>	ziad 14(10ziad@moz-s65gmp.ca.comcast.net14) has joined #rust
+T 1457584753 2<25pyon2>	Does Rust have anything like C's “volatile”?
+T 1457584804 <10-11-	shanemcd has quit 14(Ping timeout: 121 seconds14)
+T 1457584814 2<28niconii2>	pyon: there's volatile_store and volatile_fetch intrinsics, but nothing stable afaik
+T 1457584824 2<25pyon2>	Mmm.
+T 1457584832 <10-11-	Skyler has quit 14(Client exited14)
+T 1457584837 2<28niconii2>	pyon: so you'd want nightly rust for those
+T 1457584838 -10-11>	Skyler 14(10Skyler@moz-p53445.sd.cox.net14) has joined #rust
+T 1457584838 <10-11-	sub_pop has quit 14(Client exited14)
+T 1457584840 <10-11-	cab 14(bp@moz-js36o8.cable.rogers.com14) has left #rust
+T 1457584847 -10-11>	sub_pop 14(10link@moz-pgp598.nb96.vio6.0646.2601.IP14) has joined #rust
+T 1457584854 <10-11-	sub_pop has quit 14(Client exited14)
+T 1457584880 2<25pyon2>	I'm using nightly.
+T 1457584887 -10-11>	sub_pop 14(10link@moz-pgp598.nb96.vio6.0646.2601.IP14) has joined #rust
+T 1457584926 2<28niconii2>	oh, volatile_load, not volatile_fetch
+T 1457584928 2<28niconii2>	but yeah
+T 1457584943 <10-11-	scriptor has quit 14(Ping timeout: 121 seconds14)
+T 1457584945 2<28niconii2>	https://doc.rust-lang.org/nightly/std/intrinsics/fn.volatile_store.html https://doc.rust-lang.org/nightly/std/intrinsics/fn.volatile_load.html
+T 1457585151 2<25pyon2>	Thanks!
+T 1457585204 <10-11-	Skyler has quit 14(Connection closed14)
+T 1457585223 -10-11>	Skyler 14(10Skyler@moz-p53445.sd.cox.net14) has joined #rust
+T 1457585242 <10-11-	Amanieu has quit 14(Connection closed14)
+T 1457585251 -10-11>	Amanieu 14(10amanieu@moz-1l4.oco.81.192.IP14) has joined #rust
+T 1457585304 <10-11-	Cyderize_ has quit 14(Ping timeout: 121 seconds14)
+T 1457585316 <10-11-	orospakr has quit 14(Quit: My MacBook Pro has gone to sleep. ZZZzzz…14)
+T 1457585321 2<28niconii2>	no problem
+T 1457585322 <10-11-	Naeblis has quit 14(Ping timeout: 121 seconds14)
+T 1457585336 <10-11-	Dessimat0r has quit 14(Quit: ZNC - http://znc.in14)
+T 1457585340 -10-11>	scriptor 14(10scriptor@moz-19q800.res.rr.com14) has joined #rust
+T 1457585347 -10-11>	slomo 14(10slomo@moz-p8m0g2.net14) has joined #rust
+T 1457585360 <10-11-	mood has quit 14(Ping timeout: 121 seconds14)
+T 1457585368 <10-11-	mcsu has quit 14(Quit: No Ping reply in 180 seconds.14)
+T 1457585371 <10-11-	Amanieu has quit 14(Connection closed14)
+T 1457585374 <10-11-	pranz has quit 14(Quit: No Ping reply in 180 seconds.14)
+T 1457585376 -10-11>	ssylvan 14(10ssylvan@moz-qti.8in.211.162.IP14) has joined #rust
+T 1457585392 <10-11-	fredsir has quit 14(Ping timeout: 121 seconds14)
+T 1457585394 <10-11-	dom96 has quit 14(Ping timeout: 121 seconds14)
+T 1457585414 <10-11-	ramn has quit 14(Ping timeout: 121 seconds14)
+T 1457585414 <10-11-	Dtgr has quit 14(Ping timeout: 121 seconds14)
+T 1457585414 <10-11-	mathias has quit 14(Ping timeout: 121 seconds14)
+T 1457585431 -10-11>	orospakr 14(10orospakr@moz-s19ht2.cpe.teksavvy.com14) has joined #rust
+T 1457585432 2<20ssylvan2>	I'm calling a C api that takes a ptr to an uninitialiazed memory and initializes it for me. I have the struct but the compiler complains about using uninitialized memory. Is there something I can do so I don't have to write 20 lines of dummy initialization?
+T 1457585433 <10-11-	cn has quit 14(Ping timeout: 121 seconds14)
+T 1457585436 <10-11-	StarLight has quit 14(Ping timeout: 121 seconds14)
+T 1457585459 -10-11>	mcsu 14(10mcsu@moz-pi2mqp.wishf.co.uk14) has joined #rust
+T 1457585483 -10-11>	ramn 14(10ramn@moz-3u7952.ramn.se14) has joined #rust
+T 1457585491 -10-11>	mood 14(10mood@moz-73fdob.joram.io14) has joined #rust
+T 1457585498 2<25pyon2>	mem::uninitialized, perhaps?
+T 1457585510 2<20ssylvan2>	ah yes, that looks like the ticket
+T 1457585520 -10-11>	StarLight 14(10StarLight@moz-5kv283.me14) has joined #rust
+T 1457585543 -10-11>	cn 14(10cn@moz-9l3v08.enterprises14) has joined #rust
+T 1457585555 -10-11>	pranz 14(10quassel@moz-9r7l4o.velox.pw14) has joined #rust
+T 1457585558 -10-11>	Naeblis 14(10Naeblis@moz-a8t.cm0.85.95.IP14) has joined #rust
+T 1457585566 -10-11>	jpco 14(10jpco@moz-4k4jop.dhcp4.washington.edu14) has joined #rust
+T 1457585570 <10-11-	jpco has quit 14(Quit: Relay, an IRC client for the modern desktop14)
+T 1457585581 -10-11>	dom96 14(10dom@moz-junuj4.org14) has joined #rust
+T 1457585620 <10-11-	chot has quit 14(Quit: http://www.mibbit.com ajax IRC Client14)
+T 1457585638 -10-11>	Amanieu 14(10amanieu@moz-1l4.oco.81.192.IP14) has joined #rust
+T 1457585649 -10-11>	sankha 14(10sankha@moz-a48.men.59.103.IP14) has joined #rust
+T 1457585658 -10-11>	Dtgr 14(10antti@moz-d73.fs1.85.95.IP14) has joined #rust
+T 1457585665 -10-11>	mathias 14(10mathias@moz-os6.gg8.185.146.IP14) has joined #rust
+T 1457585708 -10-11>	dellavg 14(10dellavg@moz-ciipe4.retail.telecomitalia.it14) has joined #rust
+T 1457585721 -10-11>	blanket 14(10blank@moz-ihsmu3.mpls.qwest.net14) has joined #rust
+T 1457585721 -10-11>	Skyler_ 14(10Skyler@moz-p53445.sd.cox.net14) has joined #rust
+T 1457585732 <10-11-	Skyler has quit 14(Ping timeout: 121 seconds14)
+T 1457585732 -10-11-	Skyler_ is now known as Skyler
+T 1457585744 -10-11>	fredsir 14(10fredsir@moz-11k.la6.85.95.IP14) has joined #rust
+T 1457585753 2<29THIS-NICK-SUCKS2>	I want to learn something new. any interesting videos I can watch on youtube or something?
+T 1457585760 -10-11>	Dessimat0r 14(10Dessimat0r@moz-dptofd.me14) has joined #rust
+T 1457585768 -10-11>	acharles 14(10acharles@moz-sq5a99.ca.comcast.net14) has joined #rust
+T 1457585784 -10-11>	piotr 14(10larroy@moz-deo.511.226.188.IP14) has joined #rust
+T 1457585906 <10-11-	sankha has quit 14(Ping timeout: 121 seconds14)
+T 1457585915 -10-11>	dzbarsky 14(10Adium@moz-v18mcd.ca.comcast.net14) has joined #rust
+T 1457585925 <10-11-	blanked has quit 14(Ping timeout: 121 seconds14)
+T 1457585944 2<22Sgeo2>	Is specialization only for performance improvements, or is it allowed to use it for semantic meaning as well?
+T 1457586005 <10-11-	shackra has quit 14(A TLS packet with unexpected length was received.14)
+T 1457586010 2<28durka422>	who's going to stop you
+T 1457586057 <10-11-	makoLine has quit 14(Ping timeout: 121 seconds14)
+T 1457586061 -10-11>	FreeBird 14(10FreeBird@moz-asrg1h.4q5l.mq4q.120b.2a02.IP14) has joined #rust
+T 1457586070 2<25bluss2>	performance seems to be secondary
+T 1457586136 2<28durka422>	how do you figure
+T 1457586158 <10-11-	dzbarsky has quit 14(Ping timeout: 121 seconds14)
+T 1457586158 2<28durka422>	I thought most of the RFC discussion was about performance
+T 1457586188 <10-11-	urodna has quit 14(Client exited14)
+T 1457586206 2<25bluss2>	maybe but it's kind of a by product of being to express more things in the language
+T 1457586247 -10-11>	dinfuehr 14(10dinfuehr@moz-066.9nh.59.86.IP14) has joined #rust
+T 1457586250 <10-11-	orospakr has quit 14(Quit: My MacBook Pro has gone to sleep. ZZZzzz…14)
+T 1457586289 -10-11>	ixti 14(10ixti@moz-6rn.td2.128.38.IP14) has joined #rust
+T 1457586310 <10-11-	FreeBird has quit 14(Ping timeout: 121 seconds14)
+T 1457586310 <10-11-	fyolnish has quit 14(Quit: Bye14)
+T 1457586324 -10-11>	eckhardt 14(10eckhardt@moz-0b0.bm2.248.98.IP14) has joined #rust
+T 1457586338 -10-11>	sgfltx 14(10sgflt@moz-oehavf.dip0.t-ipconnect.de14) has joined #rust
+T 1457586351 -10-11>	brson 14(10brson@moz-icb.e0n.56.172.IP14) has joined #rust
+T 1457586351 -10-11-	ChanServ sets mode +a #rust brson
+T 1457586351 -10-11-	11ChanServ gives channel operator status to 11brson
+T 1457586401 -10-11>	orospakr 14(10orospakr@moz-s19ht2.cpe.teksavvy.com14) has joined #rust
+T 1457586490 <10-11-	dinfuehr has quit 14(Ping timeout: 121 seconds14)
+T 1457586509 <10-11-	sgflt has quit 14(Ping timeout: 121 seconds14)
+T 1457586513 2<19Xion2>	What's the ORM story in Rust? Any interesting libraries yet?
+T 1457586551 <10-11-	scriptor has quit 14(Connection closed14)
+T 1457586572 -10-11>	scriptor 14(10scriptor@moz-06vfqt.h6np.s8u9.2000.2604.IP14) has joined #rust
+T 1457586580 2<27keeper2>	Xion: There is one called diesel.
+T 1457586603 <10-11-	erickt has quit 14(Ping timeout: 121 seconds14)
+T 1457586679 -10-11>	eric_lagergren 14(10eric@moz-lr1hrn.wa.comcast.net14) has joined #rust
+T 1457586693 <10-11-	badon has quit 14(Ping timeout: 121 seconds14)
+T 1457586698 -10-11>	badon_ 14(10badon@moz-kqv.2ql.244.104.IP14) has joined #rust
+T 1457586707 -10-11-	badon_ is now known as badon
+T 1457586721 2<28selfup2>	Yea Sean maintains Active Record too. So Diesel is the real deal
+T 1457586735 2<22Sgeo2>	Specialization isn't in the RFCs TOC
+T 1457586760 <10-11-	freefall has quit 14(A TLS packet with unexpected length was received.14)
+T 1457586780 2<27frewsxcv2>	anyone know how to get "debug!" statements to print? https://github.com/frewsxcv/rust/blob/assoc-func/src/compiletest/errors.rs#L94
+T 1457586806 -10-11>	aravindavk 14(10aravinda@moz-m6j.f0d.244.121.IP14) has joined #rust
+T 1457586808 -10-11>	makoLine 14(10mako@moz-d0acpm.flip.co.nz14) has joined #rust
+T 1457586814 <10-11-	scriptor has quit 14(Ping timeout: 121 seconds14)
+T 1457586825 2<29Yurume2>	frewsxcv: seems to be from #[macro_use] extern crate log;
+T 1457586833 <10-11-	ixti has quit 14(Ping timeout: 121 seconds14)
+T 1457586891 <10-11-	conrad has quit 14(Ping timeout: 121 seconds14)
+T 1457586914 2<19Xion2>	selfup: Yeah, seems like it's using the Active Record model ;/
+T 1457586923 2<19Xion2>	Also, codegen that only works on nightly :(
+T 1457586927 2<20curtism2>	"the real deal"
+T 1457586933 -10-11>	demilux 14(10demilux@moz-73qa6c.wa.comcast.net14) has joined #rust
+T 1457586934 2<20curtism2>	By that do you mean a pile of mess?
+T 1457586939 <10-11-	sub_pop has quit 14(Client exited14)
+T 1457586963 2<25bluss2>	frewsxcv: define environment variable RUST_LOG=debug
+T 1457586965 2<28selfup2>	That attitude is not exactly fantastic
+T 1457586973 2<25bluss2>	frewsxcv: if that project uses env_logger
+T 1457586973 2<28selfup2>	Oh well.
+T 1457586980 2<29Yurume2>	ah, that kind of question
+T 1457586985 2<27frewsxcv2>	bluss: bingo. thanks
+T 1457586991 <10-11-	maryelizbeth has quit 14(Quit: http://www.mibbit.com ajax IRC Client14)
+T 1457586997 <10-11-	hdhoang has quit 14(Connection closed14)
+T 1457586999 2<28selfup2>	frewsxcv: puts this above your struct #[derive(Debug)]
+T 1457587013 -10-11>	hdhoang 14(10i@moz-jej.f3f.24.123.IP14) has joined #rust
+T 1457587015 2<20curtism2>	I don't know much about Diesel. But I use ActiveRecord every day and it is horrendous.
+T 1457587031 2<29Yurume2>	selfup: we are in the same league that misunderstood the original question :p
+T 1457587042 2<28selfup2>	Ohh haha
+T 1457587043 <10-11-	hdhoang has quit 14(Connection closed14)
+T 1457587069 2<19Xion2>	I'm mostly using SQLAlchemy as my reference point when judging ORMs and since it uses UoW pattern, I'm a bit skeptical about AR-based ones.
+T 1457587074 -10-11>	hdhoang 14(10i@moz-jej.f3f.24.123.IP14) has joined #rust
+T 1457587115 2<20curtism2>	ime ORMs seem nice until you learn SQL
+T 1457587132 2<20curtism2>	Then on they're just frustrating and an endless source of friction
+T 1457587138 2<28selfup2>	ActiveRecord is an old project. But I enjoy what it offers most of the time. And using raw SQL in AR is nice too
+T 1457587146 -10-11>	bjz_ 14(10bjz@moz-17i.as2.222.104.IP14) has joined #rust
+T 1457587167 2<28selfup2>	It's great for learning to talk to a DB, and doing simple joins/merge/pluck
+T 1457587224 <10-11-	aatch has quit 14(Ping timeout: 121 seconds14)
+T 1457587224 <10-11-	orospakr has quit 14(Quit: My MacBook Pro has gone to sleep. ZZZzzz…14)
+T 1457587243 <10-11-	bjz has quit 14(Ping timeout: 121 seconds14)
+T 1457587248 2<20curtism2>	imo ORMs are inherently flawed because they are an abstraction over an abstraction
+T 1457587253 -10-11>	orospakr 14(10orospakr@moz-s19ht2.cpe.teksavvy.com14) has joined #rust
+T 1457587261 2<28Griz2>	I am really confused with the toml::Value. I'm perplexed. It asked for value, so I looked up at the toml-rs docs. it has enum which entails String, Array, etc.  I figured I'll put String in value.insert( name, String)  It prompt me an error saying it needs toml::Value or whatever. Of course, that didn't make sense anyways. This is my best solution but it still doesn't make sense why it is...
+T 1457587262 2<19kmc2>	Xion: UoW?
+T 1457587263 2<28Griz2>	...giving me wrong errors. http://pastebin.com/4ACTdtcM
+T 1457587264 -10-11>	proudzhu2 14(10proudzhu@moz-40t.8kg.37.183.IP14) has joined #rust
+T 1457587275 2<19Xion2>	kmc: Unit of Work.
+T 1457587293 2<28Griz2>	line 34 
+T 1457587301 <10-11-	archshift has quit 14(Ping timeout: 121 seconds14)
+T 1457587328 2<28niconii2>	Griz: you need to actually put the string in a toml::Value, so toml::Value::String(your_string)
+T 1457587338 2<28Griz2>	 values: BTreeMap<String, Value>,
+T 1457587340 -10-11>	alicemaz 14(10alice@moz-4nq892.PUBLIC.monkeybrains.net14) has joined #rust
+T 1457587344 <10-11-	eckhardt has quit 14(Quit: Leaving...14)
+T 1457587386 <10-11-	orospakr has quit 14(Quit: My MacBook Pro has gone to sleep. ZZZzzz…14)
+T 1457587395 <10-11-	proudzhu1 has quit 14(Ping timeout: 121 seconds14)
+T 1457587433 -10-11>	chrisk 14(10chrisk@moz-pesicg.res.rr.com14) has joined #rust
+T 1457587439 <10-11-	LRN has quit 14(Quit: Miranda NG! Smaller, Faster, Easier. http://miranda-ng.org/14)
+T 1457587442 -10-11>	LRN 14(10Miranda@moz-63ipbh.nationalcablenetworks.ru14) has joined #rust
+T 1457587461 2<20curtism2>	(If anyone wanted me to expand on that, SQL is already an abstraction over the relational model, and ORMs abstract over SQL. Now I must sleep)
+T 1457587480 2<28selfup2>	cya
+T 1457587498 2<22dialeth2>	I'm probably going about this the wrong way, but http://is.gd/bysFiI
+T 1457587513 2<28niconii2>	Griz: so you need `value.insert(name, toml::Value::String(ask_name)).unwrap();`
+T 1457587547 2<28niconii2>	Griz: you can't just pass a String in directly, you have to make a toml::Value that stores it
+T 1457587566 -10-11>	mmalone 14(10mmalone@moz-h55o2k.ca.comcast.net14) has joined #rust
+T 1457587637 2<28Griz2>	yeah, I just did that before you prompt me. :p  Sweet. that works. Now that make sense.  But now I need to figure out how to insert name in there as well.   What do you mean by that, I can't just insert string in directly?  I thought that's parser job? 
+T 1457587637 2<28niconii2>	you also don't need the &mut for that insert, because it's passed in by value
+T 1457587653 2<28niconii2>	Griz: String and toml::Value are two separate types
+T 1457587678 <10-11-	makoLine has quit 14(Ping timeout: 121 seconds14)
+T 1457587680 -10-11>	hiptobecubic 14(10john@moz-gdk.apf.62.136.IP14) has joined #rust
+T 1457587682 <10-11-	chrisk has quit 14(Ping timeout: 121 seconds14)
+T 1457587685 2<28niconii2>	Griz: value.insert takes a String and then a Value
+T 1457587687 2<28Griz2>	this said otherwise. lol  This is why I insert "String" in there because I thought thats what compilar meant
+T 1457587689 2<28Griz2>	enum Value {
+T 1457587691 2<28Griz2>	    String(String),
+T 1457587707 2<28niconii2>	Griz: yeah, that's an enum with a variant called String, which stores a String in it
+T 1457587713 2<19Xion2>	https://github.com/sgrif/diesel/tree/c8127d408f759faa056503014cd00e92479215e0/diesel_tests/tests/compile-fail -- Now this is interesting (tests for specific compiler errors).
+T 1457587725 2<22Sgeo2>	Which is likely to come sooner, type macros or variadic generics?
+T 1457587731 13*	22Sgeo guesses the former
+T 1457587746 2<28niconii2>	Griz: but that doesn't mean Value is the same type as a String, it just means it can store one
+T 1457587776 2<28niconii2>	Griz: it could just as well be written `enum Value { Foo(String), ... }`
+T 1457587790 2<28niconii2>	Griz: and then you'd need to pass in `toml::Value::Foo(ask_name)`
+T 1457587797 2<28Griz2>	ohh I see
+T 1457587809 2<22Sgeo2>	A function that produces an HList is effectively several functions. A function that consumes an HSum is effectively several functions.
+T 1457587816 <10-11-	luc has quit 14(Connection closed14)
+T 1457587824 13*	22Sgeo is still trying to grasp the symmetry between them
+T 1457587825 <10-11-	}ls{ has quit 14(Quit: User terminated by real life interrupt14)
+T 1457587864 2<28Griz2>	name is still not reconized. does that mean I need to add String::new(name)?  
+T 1457587869 2<28Griz2>	that doesn't work though
+T 1457587869 <10-11-	adu has quit 14(Client exited14)
+T 1457587903 <10-11-	markstory has quit 14(Quit: My Mac has gone to sleep. ZZZzzz…14)
+T 1457587959 -10-11>	daschl 14(10Adium@moz-69ts05.vie.surfer.at14) has joined #rust
+T 1457587972 2<28durka422>	Sgeo: seeing that type macros are already implemented and seemingly not controversial at all...
+T 1457587972 2<19Xion2>	Eh, Diesel has next to zero documentation, just one getting-started guide and I guess the rest you're supposed to piece together from tests ;/
+T 1457587974 2<28niconii2>	Griz: what error are you getting exactly?
+T 1457587993 2<28niconii2>	Griz: for toml::Value::String(ask_name), that is
+T 1457588022 2<28Griz2>	src/main.rs:34:18: 34:24 error: mismatched types:
+T 1457588023 2<28Griz2>	 expected `collections::string::String`,
+T 1457588025 2<28Griz2>	    found `&'static str`
+T 1457588026 2<28Griz2>	(expected struct `collections::string::String`,
+T 1457588029 2<28Griz2>	    found &-ptr) [E0308]
+T 1457588029 2<28Griz2>	src/main.rs:34     value.insert("name", toml::Value::String(ask_name)).unwrap();
+T 1457588030 2<28Griz2>	                                ^~~~~~
+T 1457588036 2<28niconii2>	ahh
+T 1457588040 2<28Griz2>	I removed the "", btw
+T 1457588043 2<28Griz2>	and same error
+T 1457588061 2<28niconii2>	so, you need to convert that "name" to a String, it's a &str right now
+T 1457588062 2<28Griz2>	so I put String::new(name)
+T 1457588062 2<28niconii2>	so
+T 1457588069 2<28niconii2>	String::new("name") is what you want
+T 1457588083 2<28niconii2>	or, wait, hang on
+T 1457588086 2<28Griz2>	dammit, so close  lets try that
+T 1457588103 2<28Griz2>	no
+T 1457588112 2<28niconii2>	hmm?
+T 1457588118 2<28Griz2>	it didn't work
+T 1457588122 2<28niconii2>	what's the error now
+T 1457588154 2<28Griz2>	this function takes 0 parameters but 1 parameter was supplied 
+T 1457588162 2<28niconii2>	oh, whoops
+T 1457588175 2<28durka422>	String::from("name")
+T 1457588197 2<28Griz2>	why from?  it should be created new, right?  :x
+T 1457588199 2<25hub2>	"name
+T 1457588205 2<25hub2>	"name".to_string()
+T 1457588212 2<25hub2>	that works too
+T 1457588219 2<28durka422>	it's "from" a string literal, "to" an owned String
+T 1457588222 2<25Mutabah2>	hub: It does, but it's annoyingly inefficient in current rust
+T 1457588228 -10-11>	sankha 14(10sankha@moz-a48.men.59.103.IP14) has joined #rust
+T 1457588229 2<28niconii2>	String::from("name")
+T 1457588229 2<28niconii2>	not String::new
+T 1457588229 2<28niconii2>	Griz: String::new() makes an empty string, String::from("foo") converts a &str to a String
+T 1457588230 -10-11>	Aceeri 14(10uid29649@moz-opi9bt.tooting.irccloud.com14) has joined #rust
+T 1457588250 <10-11-	japaric has quit 14(Ping timeout: 121 seconds14)
+T 1457588315 <10-11-	sankha has quit 14(Connection closed14)
+T 1457588316 2<28Griz2>	this time, it's a new error which highlights value -- cannot borrow immutable local variable `value` as mutable
+T 1457588318 -10-11>	japaric 14(10japaric@moz-bit.3nr.230.201.IP14) has joined #rust
+T 1457588319 -10-11>	sankha 14(10sankha@moz-a48.men.59.103.IP14) has joined #rust
+T 1457588332 <10-11-	sankha has quit 14(Connection closed14)
+T 1457588338 <10-11-	zmack has quit 14(Connection closed14)
+T 1457588356 2<28durka422>	you need to make it mutable then
+T 1457588370 2<28durka422>	let mut value = ...
+T 1457588370 2<28Griz2>	ahh nv
+T 1457588370 2<28Griz2>	I got it
+T 1457588370 2<28Griz2>	yup I just put that in. haha
+T 1457588472 <10-11-	niconii has quit 14(Ping timeout: 121 seconds14)
+T 1457588487 <10-11-	mhcerri has quit 14(Connection closed14)
+T 1457588545 -10-11>	niconii 14(10nicole@moz-af82ih.frgo.qwest.net14) has joined #rust
+T 1457588546 -10-11-	ChanServ sets mode +a #rust niconii
+T 1457588546 -10-11-	11ChanServ gives channel operator status to 11niconii
+T 1457588546 -10-11>	mhcerri 14(10mhcerri@moz-pc4.i7r.97.179.IP14) has joined #rust
+T 1457588553 <10-11-	gopar has quit 14(Quit: Leaving14)
+T 1457588593 -10-11>	Pierre_M 14(10Pierre@moz-sk1vk0.slkc.qwest.net14) has joined #rust
+T 1457588602 2<22Sgeo2>	Starting to get a better appreciation of the math. Given that A -> B is B^A, then my prior statement is equivalent to (ab)^c = (a^c)(b^c); a^(b+c) = (a^b)(a^c)
+T 1457588621 2<28durka422>	o_O
+T 1457588627 <10-11-	lnostdal_ has quit 14(Quit: truth is like poetry, and most people fucking hate poetry14)
+T 1457588662 2<22dialeth2>	anybody? trying something akin to polymorphism, but probably going about it intirely wrong http://is.gd/bysFiI
+T 1457588663 2<28Griz2>	hmm it compiled!  but now it panicked. I rust_backtrace it, and found out that that very same line I had trouble with, panicked. <main>' panicked at 'called `Option::unwrap()` on a `None` value'.   What does this mean? 
+T 1457588684 2<25Mutabah2>	It means that something did .unwrap() on a Option::None
+T 1457588688 -10-11>	makoLine 14(10mako@moz-d0acpm.flip.co.nz14) has joined #rust
+T 1457588689 -10-11>	eevee 14(10eevee@moz-buleoj.veekun.com14) has joined #rust
+T 1457588711 2<25Mutabah2>	Griz: Run with `RUST_BACKTRACE=1 cargo run` and it should give you a good idea where
+T 1457588715 <10-11-	infynyxx has quit 14(Connection closed14)
+T 1457588721 2<28Griz2>	I already did that dude
+T 1457588724 2<28Griz2>	I found that line
+T 1457588724 2<28durka422>	dialeth: fn(&str) and fn(&str, &str) are different types
+T 1457588736 2<28Griz2>	 value.insert(String::from("name"), toml::Value::String(ask_name)).unwrap();
+T 1457588752 -10-11>	freefall 14(10ff@moz-hc7vub.mullvad.net14) has joined #rust
+T 1457588757 2<28durka422>	so value.insert() is returning None
+T 1457588761 2<25Mutabah2>	Griz: Why are you unwrapping there?
+T 1457588764 2<22dialeth2>	durka42: right. How can I go about calling those functions without writing a wrapper or some such for each one?
+T 1457588784 2<22Sgeo2>	durka42, so, an HSum![int32, String] is int32 + String. If a function consumes that, you can feed it either one. So you could split it into two functions, one that takes an int32, and one that takes a String
+T 1457588790 2<28Griz2>	I dunno?  :X 
+T 1457588798 2<28durka422>	unwrap() is a last resort
+T 1457588804 2<22Sgeo2>	Which is similar to a^(b+c) = a^b * a^c
+T 1457588806 2<28durka422>	if you absolutely know that the value is not None
+T 1457588813 2<28niconii2>	Sgeo: i got a bit confused for a second because -> and ^ are both bitwise operations
+T 1457588838 2<22Sgeo2>	-> ?
+T 1457588838 2<28durka422>	Sgeo that sounds like function overloading!
+T 1457588849 2<28niconii2>	Sgeo: https://en.wikipedia.org/wiki/Truth_table#Logical_implication
+T 1457588871 2<22Sgeo2>	niconii, I meant -> in the "function from a to b" sense
+T 1457588880 2<28niconii2>	Sgeo: yeah
+T 1457588897 2<28Griz2>	cool, that fixed the problem. now I understand what unwrap means. I always see unwrap on most cases so I figured it was needed in this case. 
+T 1457588899 2<28Griz2>	lol
+T 1457588901 2<22Sgeo2>	Oh, you were clarifying the bitwise operation
+T 1457588913 2<28niconii2>	Sgeo: yeah
+T 1457588921 2<28durka422>	dialeth: perhaps with a trait
+T 1457588952 2<22dialeth2>	a trait for Command or for one, two, three?
+T 1457588959 2<28durka422>	a trait for Command
+T 1457588964 2<28durka422>	and the impl it for tuples
+T 1457588982 <10-11-	pyon has quit 14(Quit: fix config14)
+T 1457588985 2<22Sgeo2>	durka42, eep
+T 1457588997 2<28durka422>	but I don't know how you are going to construct the arguments of the right types anyway
+T 1457588999 -10-11>	shanemcd 14(10shanemcd@moz-3dreq3.uekj.7vno.030a.2602.IP14) has joined #rust
+T 1457589000 -10-11>	nikkibeee 14(10quassel@moz-2vso5s.abhsia.telus.net14) has joined #rust
+T 1457589003 2<28durka422>	where are they coming from? keyboard?
+T 1457589006 -10-11>	pyon 14(10pyon@moz-72i.kfv.7.179.IP14) has joined #rust
+T 1457589024 2<22dialeth2>	yes
+T 1457589033 2<28durka422>	so won't they all be strings anyway?
+T 1457589085 <10-11-	Amaranth has quit 14(Connection closed14)
+T 1457589085 2<22dialeth2>	yes. should the usize in three() be a generic then?
+T 1457589114 2<28durka422>	I mean you could just define them all to take Vec<String> :p
+T 1457589122 2<28durka422>	and do the argument number/type validation inside
+T 1457589134 2<22dialeth2>	have to assume they can't be changed
+T 1457589135 <10-11-	orangeshark has quit 14(Quit: Leaving14)
+T 1457589137 <10-11-	mmalone has quit 14(Quit: My Mac has gone to sleep. ZZZzzz…14)
+T 1457589160 <10-11-	nikkibee has quit 14(Ping timeout: 121 seconds14)
+T 1457589175 2<22dialeth2>	I was going to write a wrapper for each that did that, but figured I'd ask here first
+T 1457589191 2<22dialeth2>	because that's not very clean
+T 1457589209 <10-11-	selfup has quit 14(Quit: 14)
+T 1457589219 2<28durka422>	it seems like that or a big switch statement
+T 1457589233 2<28durka422>	it's hard to dispatch at compile time if you don't know the types until runtime :p
+T 1457589241 <10-11-	shanemcd has quit 14(Ping timeout: 121 seconds14)
+T 1457589288 2<22dialeth2>	we know the types at compile time though
+T 1457589294 <10-11-	japaric has quit 14(Ping timeout: 121 seconds14)
+T 1457589360 2<28durka422>	but you don't know which command will be invoked
+T 1457589368 -10-11>	japaric 14(10japaric@moz-ek3.oga.232.190.IP14) has joined #rust
+T 1457589387 -10-11>	kevin 14(10kevin@moz-mqeh0c.res.rr.com14) has joined #rust
+T 1457589396 2<22dialeth2>	we know which function will be called for a given command
+T 1457589420 2<28durka422>	yeah
+T 1457589429 2<28durka422>	I'm not coming up with a design that's cleverer than the wrappers
+T 1457589435 <10-11-	sgfltx has quit 14(Client exited14)
+T 1457589441 2<28durka422>	but I haven't thought about it for that long
+T 1457589470 <10-11-	woboats has quit 14(Client exited14)
+T 1457589478 -10-11>	woboats 14(10woboats@moz-8rajde.ca.comcast.net14) has joined #rust
+T 1457589482 <10-11-	dellavg has quit 14(Ping timeout: 121 seconds14)
+T 1457589511 -10-11>	Amaranth 14(10travis@moz-rrrpsq.cpe.cableone.net14) has joined #rust
+T 1457589521 2<28durka422>	talchas: around?
+T 1457589528 <10-11-	beat has quit 14(Connection closed14)
+T 1457589575 <10-11-	Nilabhra has quit 14(Ping timeout: 121 seconds14)
+T 1457589592 -10-11>	adu 14(10ajr@moz-99ult9.md.comcast.net14) has joined #rust
+T 1457589688 -10-11>	JanC_ 14(10janc@moz-7ch14l.dsl.scarlet.be14) has joined #rust
+T 1457589692 FiSHLiM plugin unloaded
+T 1457589692 Python interface unloaded

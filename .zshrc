@@ -1,12 +1,12 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/honorabrutroll/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="powerlevel9k/powerlevel9k"
-DEFAULT_USER="honorabrutroll"
+DEFAULT_USER="$USER"
 EDITOR=nvim
 export VISUAL=nvim
 # Uncomment the following line to use case-sensitive completion.
@@ -50,8 +50,6 @@ ENABLE_CORRECTION="true"
 plugins=(git common-aliases history sudo web-search)
 
 # User configuration
-
-export PATH="/home/honorabrutroll/.cabal/bin:/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/opt/android-ndk:/opt/android-sdk/build-tools/19.0.3/:/opt/android-sdk/platform-tools:/opt/android-sdk/tools:/opt/cuda/bin:/usr/lib/emscripten:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/honorabrutroll/Elm-Platform/master/bin:/home/honorabrutroll/Elm-Platform/master/elm-reactor/dist/dist-sandbox-5b4019b4/build/elm-reactor"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -80,10 +78,11 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export PATH=$PATH:/home/honorabrutroll/.nvim/plugged/rust.vim/syntax_checkers/rust/
-
-
-export PATH=/home/honorabrutroll/pi-tools/rust-on-raspberry-pi:/home/honorabrutroll/pi-tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin:$PATH
-export PATH=/home/honorabrutroll/.multirust/toolchains/nightly/cargo/bin:$PATH
+export PATH=$PATH:$HOME/.nvim/plugged/rust.vim/syntax_checkers/rust/
+export PATH=$HOME/pi-tools/rust-on-raspberry-pi:/home/honorabrutroll/pi-tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin:$PATH
+export PATH=$HOME/.multirust/toolchains/nightly/cargo/bin:$PATH
 alias reflupdate='sudo reflector --verbose --country 'United States'  -l 5 -p http --sort rate --threads 1 --save /etc/pacman.d/mirrorlist && yaourt -Syy'
-export XDG_CONFIG_HOME=/home/honorabrutroll/.local
+export PATH=/home/honorabrutroll/.gem/ruby/2.3.0/bin:$PATH
+export BROWSER=/usr/bin/firefox-developer
+# added by travis gem
+[ -f /home/honorabrutroll/.travis/travis.sh ] && source /home/honorabrutroll/.travis/travis.sh
