@@ -33,8 +33,7 @@ python2 ./install.py --clang-complete --racer-complete
 cd "$HOME"
 # Run :PlugInstall after completion in nvim
 # If synaptics touchpad
-echo "ibus-daemon" >> "$HOME/.profile"
-echo "photoqt --start-in-tray" >> "$HOME/.profile"
+# add ibus-daemon and photoqt --start-in-tray to startup applications
 if xinput list | grep -Fq "Synaptics"
 then
     echo "synclient PalmDetect=1" >> "$HOME/.profile"
