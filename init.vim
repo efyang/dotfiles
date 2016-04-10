@@ -1,12 +1,12 @@
 "do pip install neovim twisted argparse
 "install ctags
 
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo "~/.config/nvim/autoload/plug.vim" --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-  autocmd VimEnter * PlugInstall | source "~/.config/nvim/init.vim"
+if empty(glob('$HOME/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo "$HOME/.config/nvim/autoload/plug.vim" --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  autocmd VimEnter * PlugInstall | source "$HOME/.config/nvim/init.vim"
 endif
 
-call plug#begin('~/.local/nvim/plugged')
+call plug#begin('$HOME/.config/nvim/plugged')
 
 " Languages
 Plug 'pangloss/vim-javascript',{'for' : ['javascript', 'html5', 'html']}
@@ -19,7 +19,7 @@ Plug 'fatih/vim-go', {'for' : 'go'}
 Plug 'rust-lang/rust.vim', {'for' : 'rust'}
 Plug 'mattn/webapi-vim', {'for' : 'rust'}
 Plug 'rust-lang/rust', {'for': 'none'}
-Plug 'Valloric/YouCompleteMe', { 'do': 'YCM_CORES = 2 python2 ./install.py --clang-completer --racer-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': 'YCM_CORES=2 python2 ./install.py --clang-completer --racer-completer' }
 Plug 'lukerandall/haskellmode-vim', {'for' : 'haskell'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for' : 'cpp'}
 Plug 'ap/vim-css-color', {'for' : ['javascript', 'html5', 'html']}
@@ -30,7 +30,7 @@ Plug 'guns/vim-clojure-static', {'for' : 'clojure'}
 Plug 'LaTeX-Box-Team/LaTeX-Box', {'for' : 'LaTeX'}
 Plug 'vitalk/vim-shebang'
 Plug 'cespare/vim-toml', {'for' : 'toml'}
-Plug 'rhysd/rust-doc.vim', {'for': 'rust', 'do' : 'rm -f rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && rm -rf ~/Documents/rust-docs && wget -q https://static.rust-lang.org/dist/rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && tar xf rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && mv rust-docs-nightly-x86_64-unknown-linux-gnu/rust-docs ~/Documents/ && rm -f rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && rm -rf rust-docs-nightly-x86_64-unknown-linux-gnu'}
+Plug 'rhysd/rust-doc.vim', {'for': 'rust', 'do' : 'rm -f rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && rm -rf $HOME/Documents/rust-docs && wget -q https://static.rust-lang.org/dist/rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && tar xf rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && mv rust-docs-nightly-x86_64-unknown-linux-gnu/rust-docs $HOME/Documents/ && rm -f rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && rm -rf rust-docs-nightly-x86_64-unknown-linux-gnu'}
 " Colorschemes
 Plug 'bronson/vim-crosshairs'
 Plug 'geoffharcourt/one-dark.vim'
@@ -38,6 +38,7 @@ Plug 'zeis/vim-kolor'
 Plug 'Yggdroot/indentline'
 Plug 'junegunn/seoul256.vim'
 Plug 'rhysd/wallaby.vim'
+Plug 'morhetz/gruvbox'
 " Exterior addons
 Plug 'bling/vim-airline'
 Plug 'ryanss/vim-hackernews', {'on': 'HackerNews'}
@@ -223,6 +224,7 @@ let g:tagbar_type_rust = {
             \]
             \}
 " Set Colorscheme
-colors onedark
+set background=dark
+colors gruvbox
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 set clipboard=unnamedplus
