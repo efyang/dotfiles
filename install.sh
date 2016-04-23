@@ -2,7 +2,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR
 printf "\n"
 CONTINUE=false
-while [ "$CONTINUE" = false ]
+while ! $CONTINUE
 do
     if [[ "$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep state)" == *"discharging"* ]]; then
         BAT_STATE=false
@@ -16,13 +16,13 @@ do
         NET_STATE=true
     fi
     
-    if [ "$NET_STATE" = true ]; then
+    if $NET_STATE; then
         NET_INDICATOR="✓"
     else
         NET_INDICATOR="✗"
     fi
     
-    if [ "$BAT_STATE" = true ]; then
+    if $BAT_STATE; then
         BAT_INDICATOR="✓"
     else
         BAT_INDICATOR="✗"
@@ -32,9 +32,11 @@ do
     printf "Connected to power: $BAT_INDICATOR\n"
     printf "Connected to internet: $NET_INDICATOR"
 
-    if [ $NET_STATE -a $BAT_STATE ]; then
+    if $NET_STATE && $BAT_STATE; then
         CONTINUE=true
         printf "\n"
+    else
+        sleep 1
     fi
 done
 echo -n "Git name: "
