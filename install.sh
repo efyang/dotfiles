@@ -1,5 +1,42 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR
+printf "\n"
+CONTINUE=false
+while [ "$CONTINUE" = false ]
+do
+    if [[ "$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep state)" == *"discharging"* ]]; then
+        BAT_STATE=false
+    else
+        BAT_STATE=true
+    fi
+    wget -q --tries=10 --timeout=20 --spider http://google.com > /dev/null
+    if [[ $? -ne 0 ]]; then
+        NET_STATE=false
+    else
+        NET_STATE=true
+    fi
+    
+    if [ "$NET_STATE" = true ]; then
+        NET_INDICATOR="✓"
+    else
+        NET_INDICATOR="✗"
+    fi
+    
+    if [ "$BAT_STATE" = true ]; then
+        BAT_INDICATOR="✓"
+    else
+        BAT_INDICATOR="✗"
+    fi
+
+    printf "\r\e[1A"
+    printf "Connected to power: $BAT_INDICATOR\n"
+    printf "Connected to internet: $NET_INDICATOR"
+
+    if [ $NET_STATE -a $BAT_STATE ]; then
+        CONTINUE=true
+        printf "\n"
+    fi
+done
 echo -n "Git name: "
 read $NAME
 echo -n "Git email: "
