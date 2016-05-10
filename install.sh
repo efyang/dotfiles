@@ -15,13 +15,13 @@ do
     else
         NET_STATE=true
     fi
-    
+
     if $NET_STATE; then
         NET_INDICATOR="✓"
     else
         NET_INDICATOR="✗"
     fi
-    
+
     if $BAT_STATE; then
         BAT_INDICATOR="✓"
     else
@@ -45,27 +45,28 @@ echo -n "Git email: "
 read $EMAIL
 sudo dirmngr &
 sudo pacman-key --refresh-keys
-sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang sakura docky intel-ucode sddm i3lock i3status ibus ibus-sunpinyin graphviz jq ttf-droid ttf-fira-mono ttf-fira-sans adobe-source-han-sans-cn-fonts xfce4-goodies xarchiver gvfs gvfs-smb intellij-idea-community-edition mate-system-monitor clementine flashplugin qalculate-gtk gtk-theme-arc deluge calligra-krita gimp xclip ninja python2-pip python-pip --noconfirm
+sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang sakura docky intel-ucode i3lock i3status ibus ibus-sunpinyin graphviz jq ttf-droid ttf-fira-mono ttf-fira-sans adobe-source-han-sans-cn-fonts xfce4-goodies xarchiver gvfs gvfs-smb intellij-idea-community-edition mate-system-monitor clementine flashplugin qalculate-gtk gtk-theme-arc deluge calligra-krita gimp xclip ninja python2-pip python-pip mesa-demos xorg-drivers --noconfirm
 gpg --keyserver http://pgp.mit.edu --recv-keys 0x4E2C6E8793298290
-CC=/usr/bin/clang CXX=/usr/bin/clang++ yaourt -S firefox-developer freshplayerplugin sddm-numix-theme-git i3-gaps-next-git dmenu2 albert atom-editor-bin libtinfo skippy-xd-git sublime-text-dev photoqt bomi xfluxd tor-browser-en thermald xfluxd libtinfo --noconfirm
+CC=/usr/bin/clang CXX=/usr/bin/clang++ yaourt -S firefox-developer freshplayerplugin i3-gaps-next-git dmenu2 albert atom-editor-bin libtinfo skippy-xd-git sublime-text-dev photoqt bomi xfluxd tor-browser-en thermald --noconfirm
 sudo ln -s /usr/lib/libtinfo.so /usr/lib/libtinfo.so.5
-sudo ln -s /usr/lib/systemd/system/sddm.service /etc/systemd/system/display-manager.service --force
 sudo systemctl start thermald
 sudo systemctl enable thermald
 sudo systemctl enable xfluxd
-sudo sh -c "sddm --example-config > /etc/sddm.conf"
-sudo sh -c 'printf "[Theme]\nCurrent=numix\n" >> /etc/sddm.conf'
-sudo pacman -Rns pragha light-locker lightdm light-locker-settings lightdm-webkit2-greeter
+sudo pacman -Rns pragha
 sudo timedatectl set-ntp true
 systemctl --user enable xfluxd
 \cp -R ".config/" "$HOME/.config"
-\cp -R "backgrounds" "$HOME/Pictures/backgrounds"
+mkdir "$HOME/Pictures/backgrounds"
+tar -xvf "backgrounds.tar.xz" --overwrite-dir -C "$HOME/Pictures/backgrounds"
+sudo mkdir "/var/lib/AccountsService/wallpapers"
+sudo tar -xvf "lightdm-wallpapers.tar.xz" --overwrite-dir -C "/var/lib/AccountsService/wallpapers"
+sudo \cp "lightdm-webkit2-greeter.conf" "/etc/lightdm/lightdm-webkit2-greeter.conf"
 git config --global user.name "$NAME"
 git config --global user.email "$EMAIL"
 git config --global push.default simple
 sudo pip install argparse
 curl -sf https://raw.githubusercontent.com/brson/multirust/master/blastoff.sh | sh
-multirust update 
+multirust update
 multirust default nightly
 cargo install cargo-check
 cargo install cargo-edit
@@ -77,6 +78,10 @@ git clone "https://github.com/zagortenay333/Harmattan" "$HOME/Harmattan"
 git clone "https://github.com/Valloric/YouCompleteMe.git" "$HOME/.config/nvim/plugged/YouCompleteMe"
 cd "$HOME/.config/nvim/plugged/YouCompleteMe"
 git submodule update --init --recursive
+RAM="${${${$(cat /proc/meminfo | grep MemTotal)%kB*}#MemTotal:}// /}"
+if [ "$RAM" -lt 4194304 ]; then
+    export YCM_CORES=2
+fi
 python2 ./install.py --clang-complete --racer-complete
 cd "$HOME"
 if xinput list | grep -Fq "Synaptics"
