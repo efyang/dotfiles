@@ -57,9 +57,11 @@ sudo timedatectl set-ntp true
 systemctl --user enable xfluxd
 \cp -R ".config/" "$HOME/.config"
 mkdir "$HOME/Pictures/backgrounds"
-tar -xvf "backgrounds.tar.xz" --overwrite-dir -C "$HOME/Pictures/backgrounds"
+tar -xvf "backgrounds.tar.xz" --overwrite-dir -C "$HOME/Pictures"
 sudo mkdir "/var/lib/AccountsService/wallpapers"
-sudo tar -xvf "lightdm-wallpapers.tar.xz" --overwrite-dir -C "/var/lib/AccountsService/wallpapers"
+sudo tar -xvf "lightdm-wallpapers.tar.xz" --overwrite-dir -C "/var/lib/AccountsService"
+sudo mv "/var/lib/AccountsService/lightdm-wallpapers" "/var/lib/AccountsService/wallpapers"
+sudo echo "Icon=/usr/share/lightdm-webkit/themes/material/assets/ui/avatar.png" >> "/var/lib/AccountsService/users/$USER"
 sudo \cp "lightdm-webkit2-greeter.conf" "/etc/lightdm/lightdm-webkit2-greeter.conf"
 git config --global user.name "$NAME"
 git config --global user.email "$EMAIL"
@@ -71,6 +73,7 @@ multirust default nightly
 cargo install cargo-check
 cargo install cargo-edit
 cargo install cargo-graph
+cargo install cargo-clippy
 \cp ".zshrc" "$HOME/.zshrc"
 git clone "https://github.com/zagortenay333/Harmattan" "$HOME/Harmattan"
 \cp -R "$HOME/Harmattan/.harmattan-assets/" "$HOME/.harmattan-assets/"
