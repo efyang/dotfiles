@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="Metric" mtime="1467494362" type="bool" value="true"/>
+	<entry name="Location" mtime="1467494361" type="list" ltype="string">
+		<li type="string">
+			<stringvalue>60637</stringvalue>
+		</li>
+	</entry>
+</gconf>

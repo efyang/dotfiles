@@ -2,9 +2,9 @@
 Encoding=UTF-8
 Version=0.9.4
 Type=Application
-Name=clementine
-Comment=
-Exec=/home/efyang/scripts/clementine.sh
+Name=albert
+Comment=albert
+Exec=albert
 OnlyShowIn=XFCE;
 StartupNotify=false
 Terminal=false

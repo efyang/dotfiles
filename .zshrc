@@ -80,7 +80,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export PATH=$PATH:$HOME/.nvim/plugged/rust.vim/syntax_checkers/rust/
 export PATH=$HOME/pi-tools/rust-on-raspberry-pi:/home/honorabrutroll/pi-tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin:$PATH
-export PATH=$HOME/.multirust/toolchains/nightly/cargo/bin:$PATH
 alias reflupdate='sudo reflector --verbose --country 'United States'  -l 5 -p http --sort rate --threads 1 --save /etc/pacman.d/mirrorlist && yaourt -Syy'
 export PATH=/home/honorabrutroll/.gem/ruby/2.3.0/bin:$PATH
 export BROWSER=/usr/bin/firefox-developer

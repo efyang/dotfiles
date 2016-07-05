@@ -12,8 +12,8 @@
         <property name="workspace0" type="empty">
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/home/honorabrutroll/Pictures/backgrounds/fbVEMLV.jpg"/>
-          <property name="backdrop-cycle-enable" type="bool" value="true"/>
+          <property name="last-image" type="string" value="/home/efyang/Pictures/backgrounds/rzMZRFt.jpg"/>
+          <property name="backdrop-cycle-enable" type="bool" value="false"/>
           <property name="backdrop-cycle-random-order" type="bool" value="true"/>
         </property>
       </property>
@@ -46,7 +46,7 @@
     </property>
   </property>
   <property name="last" type="empty">
-    <property name="window-width" type="int" value="639"/>
+    <property name="window-width" type="int" value="644"/>
     <property name="window-height" type="int" value="534"/>
   </property>
   <property name="desktop-icons" type="empty">

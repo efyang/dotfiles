@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=ImpulseScreenlet
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Exec= python2 -u /home/efyang/.screenlets/Impulse/ImpulseScreenlet.py
+X-GNOME-Autostart-enabled=true

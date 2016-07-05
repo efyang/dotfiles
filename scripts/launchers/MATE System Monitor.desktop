@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=MATE System Monitor
+Comment=View current processes and monitor system state
+Exec=mate-system-monitor
+Icon=utilities-system-monitor
+Path=
+Terminal=false
+StartupNotify=true

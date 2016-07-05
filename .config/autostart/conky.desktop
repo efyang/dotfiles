@@ -2,9 +2,9 @@
 Encoding=UTF-8
 Version=0.9.4
 Type=Application
-Name=clementine
+Name=conky
 Comment=
-Exec=/home/efyang/scripts/clementine.sh
+Exec=/home/efyang/scripts/conky.sh
 OnlyShowIn=XFCE;
 StartupNotify=false
 Terminal=false

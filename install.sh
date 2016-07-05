@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR
 printf "\n"
@@ -45,37 +46,43 @@ echo -n "Git email: "
 read $EMAIL
 sudo dirmngr &
 sudo pacman-key --refresh-keys
-sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang sakura docky intel-ucode i3lock i3status ibus ibus-sunpinyin graphviz jq ttf-droid ttf-fira-mono ttf-fira-sans adobe-source-han-sans-cn-fonts xfce4-goodies xarchiver gvfs gvfs-smb intellij-idea-community-edition mate-system-monitor clementine flashplugin qalculate-gtk gtk-theme-arc deluge calligra-krita gimp xclip ninja python2-pip python-pip mesa-demos xorg-drivers --noconfirm
+sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang sakura docky intel-ucode i3lock i3status ibus ibus-sunpinyin graphviz jq ttf-droid ttf-fira-mono ttf-fira-sans adobe-source-han-sans-cn-fonts xfce4-goodies xarchiver gvfs gvfs-smb intellij-idea-community-edition mate-system-monitor clementine flashplugin qalculate-gtk gtk-theme-arc deluge krita gimp xclip ninja python2-pip python-pip mesa-demos xorg-drivers redshift adobe-source-code-pro reflector networkmanager-openconnect screenfetch screenlets --noconfirm
 gpg --keyserver http://pgp.mit.edu --recv-keys 0x4E2C6E8793298290
-CC=/usr/bin/clang CXX=/usr/bin/clang++ yaourt -S firefox-developer freshplayerplugin i3-gaps-next-git dmenu2 albert atom-editor-bin libtinfo skippy-xd-git sublime-text-dev photoqt bomi xfluxd tor-browser-en thermald --noconfirm
+yaourt -S firefox-developer freshplayerplugin i3-gaps-next-git dmenu2 albert atom-editor-bin libtinfo skippy-xd-git sublime-text-dev photoqt tor-browser-en thermald gtk-theme-adapta-git lightdm-webkit-theme-material-git --noconfirm
 sudo ln -s /usr/lib/libtinfo.so /usr/lib/libtinfo.so.5
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo systemctl start thermald
 sudo systemctl enable thermald
-sudo systemctl enable xfluxd
 sudo pacman -Rns pragha
 sudo timedatectl set-ntp true
-systemctl --user enable xfluxd
-\cp -R ".config/" "$HOME/.config"
+rsync -av "scripts/" "$HOME/scripts/"
+rsync -av ".config/" "$HOME/.config/"
 mkdir "$HOME/Pictures/backgrounds"
-tar -xvf "backgrounds.tar.xz" --overwrite-dir -C "$HOME/Pictures"
+tar -xvf "backgrounds.tar.xz" --overwrite-dir -C "$HOME/Pictures/"
 sudo mkdir "/var/lib/AccountsService/wallpapers"
-sudo tar -xvf "lightdm-wallpapers.tar.xz" --overwrite-dir -C "/var/lib/AccountsService"
-sudo mv "/var/lib/AccountsService/lightdm-wallpapers" "/var/lib/AccountsService/wallpapers"
+sudo tar -xvf "lightdm-wallpapers.tar.xz" --overwrite-dir -C "/var/lib/AccountsService/"
+sudo rsync -av "/var/lib/AccountsService/lightdm-wallpapers/" "/var/lib/AccountsService/wallpapers/"
+sudo rm -rf "/var/lib/AccountsService/lightdm-wallpapers"
 sudo echo "Icon=/usr/share/lightdm-webkit/themes/material/assets/ui/avatar.png" >> "/var/lib/AccountsService/users/$USER"
 sudo \cp "lightdm-webkit2-greeter.conf" "/etc/lightdm/lightdm-webkit2-greeter.conf"
 git config --global user.name "$NAME"
 git config --global user.email "$EMAIL"
 git config --global push.default simple
 sudo pip install argparse
-curl -sf https://raw.githubusercontent.com/brson/multirust/master/blastoff.sh | sh
-multirust update
-multirust default nightly
+curl https://sh.rustup.rs -sSf | sh
+rustup install nightly
+rustup default nightly
+source $HOME/.cargo/env
 cargo install cargo-check
 cargo install cargo-edit
 cargo install cargo-graph
-cargo install cargo-clippy
+cargo install clippy
+curl "http://dl.dafont.com/dl/?f=sansation" -o sansation.zip >/dev/null
+unzip sansation.zip -d "$HOME/.fonts"
+rm -f sansation.zip
 \cp ".zshrc" "$HOME/.zshrc"
 git clone "https://github.com/zagortenay333/Harmattan" "$HOME/Harmattan"
+rm -rf "$HOME/Harmattan"
 \cp -R "$HOME/Harmattan/.harmattan-assets/" "$HOME/.harmattan-assets/"
 \cp ".conkyrc" "$HOME/.conkyrc"
 git clone "https://github.com/Valloric/YouCompleteMe.git" "$HOME/.config/nvim/plugged/YouCompleteMe"
@@ -92,24 +99,6 @@ then
     echo "synclient PalmDetect=1" >> "$HOME/.profile"
 fi
 git clone "https://github.com/bhilburn/powerlevel9k" "$HOME/.oh-my-zsh/custom/powerlevel9k"
-read LAT LON <<< $(
-for word in $(wget -qO- http://ip-api.com/line/\?fields\=lat,lon)
-do
-    echo $word
-done
-)
-sudo echo "# Your X screen
-DISPLAY=:0
-
-# Your current latitude
-LAT=$LAT
-
-# Your current longitude
-LON=$LON
-
-# The desired colour temperature
-TEMP=3400" > /etc/xfluxd.conf
-sudo systemctl start xfluxd
 # clear unused
 sudo pacman -Rns $(pacman -Qtdq) --noconfirm
 sudo pacman -Scc --noconfirm
