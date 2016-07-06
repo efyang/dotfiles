@@ -69,6 +69,8 @@ sudo pacman -Rns pragha --noconfirm
 sudo timedatectl set-ntp true
 rsync -av "scripts/" "$HOME/scripts/"
 rsync -av ".config/" "$HOME/.config/"
+mkdir -p "$HOME/.config/nvim"
+\cp ".config/nvim/init.vim" "$HOME/.config/nvim/init.vim"
 mkdir "$HOME/Pictures/backgrounds"
 tar -xvf "backgrounds.tar.xz" --overwrite-dir -C "$HOME/Pictures/"
 sudo mkdir "/var/lib/AccountsService/wallpapers"
