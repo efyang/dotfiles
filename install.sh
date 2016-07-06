@@ -41,9 +41,9 @@ do
     fi
 done
 echo -n "Git name: "
-read $NAME
+read NAME
 echo -n "Git email: "
-read $EMAIL
+read EMAIL
 
 # Prevent sudo timeout
 sudo -v # ask for sudo password up-front
