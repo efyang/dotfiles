@@ -117,5 +117,7 @@ git clone "https://github.com/bhilburn/powerlevel9k" "$HOME/.oh-my-zsh/custom/po
 sudo pacman -Rns $(pacman -Qtdq) --noconfirm
 sudo pacman -Scc --noconfirm
 nvim -c "PlugInstall | R | R | R | :q | :q"
-echo "zsh" >> "$HOME/.bashrc"
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+git clone "https://raw.github.com/robbyrussell/oh-my-zsh/"
+rsync -av "./oh-my-zsh/" "$HOME/.oh-my-zsh/"
+rm -rf "./oh-my-zsh"
+chsh -s "/usr/bin/zsh"
