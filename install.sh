@@ -116,7 +116,13 @@ git clone "https://github.com/bhilburn/powerlevel9k" "$HOME/.oh-my-zsh/custom/po
 # clear unused
 sudo pacman -Rns $(pacman -Qtdq) --noconfirm
 sudo pacman -Scc --noconfirm
-nvim -c "PlugInstall | R | R | R | :q | :q"
+nvim -c "PlugInstall | :q | :q"
+
+# gen ssh key for github
+ssh-keygen -t rsa -b 4096 -C "$EMAIL"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+
 git clone "https://raw.github.com/robbyrussell/oh-my-zsh/"
 rsync -av "./oh-my-zsh/" "$HOME/.oh-my-zsh/"
 rm -rf "./oh-my-zsh"
