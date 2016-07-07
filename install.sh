@@ -77,7 +77,7 @@ sudo mkdir "/var/lib/AccountsService/wallpapers"
 sudo tar -xvf "lightdm-wallpapers.tar.xz" --overwrite-dir -C "/var/lib/AccountsService/"
 sudo rsync -av "/var/lib/AccountsService/lightdm-wallpapers/" "/var/lib/AccountsService/wallpapers/"
 sudo rm -rf "/var/lib/AccountsService/lightdm-wallpapers"
-echo "Icon=/usr/share/lightdm-webkit/themes/material/assets/ui/avatar.png" | sudo tee "/var/lib/AccountsService/users/$USER" > /dev/null
+echo "Icon=/usr/share/lightdm-webkit/themes/material/assets/ui/avatar.png" | sudo tee -a "/var/lib/AccountsService/users/$USER" > /dev/null
 sudo \cp "lightdm-webkit2-greeter.conf" "/etc/lightdm/lightdm-webkit2-greeter.conf"
 git config --global user.name "$NAME"
 git config --global user.email "$EMAIL"
