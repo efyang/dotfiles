@@ -98,6 +98,7 @@ rm -f sansation.zip
 git clone "https://github.com/zagortenay333/Harmattan" "$HOME/Harmattan"
 rm -rf "$HOME/Harmattan"
 \cp -R "$HOME/Harmattan/.harmattan-assets/" "$HOME/.harmattan-assets/"
+\cp -R ".screenlets/" "$HOME/.screenlets/"
 \cp ".conkyrc" "$HOME/.conkyrc"
 git clone "https://github.com/Valloric/YouCompleteMe.git" "$HOME/.config/nvim/plugged/YouCompleteMe"
 cd "$HOME/.config/nvim/plugged/YouCompleteMe"
