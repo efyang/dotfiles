@@ -60,12 +60,12 @@ sudo dirmngr &
 sudo pacman-key --refresh-keys
 sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang sakura docky intel-ucode i3lock i3status ibus ibus-sunpinyin graphviz jq ttf-droid ttf-fira-mono ttf-fira-sans adobe-source-han-sans-cn-fonts xfce4-goodies xarchiver gvfs gvfs-smb intellij-idea-community-edition mate-system-monitor clementine flashplugin qalculate-gtk gtk-theme-arc deluge krita gimp xclip ninja python2-pip python-pip mesa-demos xorg-drivers redshift adobe-source-code-pro-fonts reflector networkmanager-openconnect screenfetch screenlets rsync --noconfirm
 gpg --keyserver http://pgp.mit.edu --recv-keys 0x4E2C6E8793298290
+sudo pacman -Rns pragha numix-icon-theme numix-icon-theme-square --noconfirm
 yaourt -S firefox-developer freshplayerplugin i3-gaps-next-git dmenu2 albert atom-editor-bin libtinfo skippy-xd-git sublime-text-dev photoqt tor-browser-en thermald gtk-theme-adapta-git lightdm-webkit-theme-material-git numix-circle-icon-theme-git --noconfirm
 sudo ln -s /usr/lib/libtinfo.so /usr/lib/libtinfo.so.5
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo systemctl start thermald
 sudo systemctl enable thermald
-sudo pacman -Rns pragha --noconfirm
 sudo timedatectl set-ntp true
 rsync -av "scripts/" "$HOME/scripts/"
 rsync -av ".config/" "$HOME/.config/"
