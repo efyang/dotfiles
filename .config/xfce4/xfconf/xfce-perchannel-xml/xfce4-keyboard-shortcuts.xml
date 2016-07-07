@@ -34,9 +34,6 @@
       <property name="&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
       <property name="&lt;Primary&gt;Escape" type="string" value="xfdesktop --menu"/>
       <property name="override" type="bool" value="true"/>
-      <property name="XF86AudioRaiseVolume" type="string" value="amixer -q sset Master 3%+"/>
-      <property name="XF86AudioLowerVolume" type="string" value="amixer -q sset Master 3%-"/>
-      <property name="XF86AudioMute" type="string" value="amixer -q sset Master toggle"/>
       <property name="Print" type="string" value="xfce4-screenshooter -f"/>
       <property name="&lt;Primary&gt;Print" type="string" value="xfce4-screenshooter -w"/>
       <property name="&lt;Primary&gt;Right" type="string" value="clementine -f"/>
@@ -49,6 +46,9 @@
       <property name="&lt;Primary&gt;&lt;Alt&gt;space" type="string" value="clementine -t"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;Right" type="string" value="clementine --next"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;Left" type="string" value="clementine --previous"/>
+      <property name="XF86AudioLowerVolume" type="string" value="amixer -q sset Master 3%-"/>
+      <property name="XF86AudioRaiseVolume" type="string" value="amixer -q sset Master 3%+"/>
+      <property name="XF86AudioMute" type="string" value="amixer -D pulse set Master Playback Switch toggle"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
