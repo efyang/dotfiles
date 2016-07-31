@@ -58,7 +58,7 @@ done &
 
 sudo dirmngr &
 sudo pacman-key --refresh-keys
-sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang sakura docky intel-ucode i3lock i3status ibus ibus-sunpinyin graphviz jq ttf-droid ttf-fira-mono ttf-fira-sans adobe-source-han-sans-cn-fonts xfce4-goodies xarchiver gvfs gvfs-smb intellij-idea-community-edition mate-system-monitor clementine flashplugin qalculate-gtk gtk-theme-arc deluge krita gimp xclip ninja python2-pip python-pip mesa-demos xorg-drivers redshift adobe-source-code-pro-fonts reflector networkmanager-openconnect screenfetch screenlets rsync --noconfirm
+sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang sakura docky intel-ucode i3lock i3status ibus ibus-sunpinyin graphviz jq ttf-droid ttf-fira-mono ttf-fira-sans adobe-source-han-sans-cn-fonts xfce4-goodies gvfs gvfs-smb intellij-idea-community-edition mate-system-monitor clementine flashplugin qalculate-gtk gtk-theme-arc deluge krita gimp xclip ninja python2-pip python-pip mesa-demos xorg-drivers redshift adobe-source-code-pro-fonts reflector networkmanager-openconnect screenfetch screenlets rsync gparted python-pyqt5 --noconfirm
 gpg --keyserver http://pgp.mit.edu --recv-keys 0x4E2C6E8793298290
 sudo pacman -Rns pragha numix-icon-theme numix-icon-theme-square --noconfirm
 yaourt -S firefox-developer freshplayerplugin i3-gaps-next-git dmenu2 albert atom-editor-bin libtinfo skippy-xd-git sublime-text-dev photoqt tor-browser-en thermald gtk-theme-adapta-git lightdm-webkit-theme-material-git numix-circle-icon-theme-git --noconfirm
@@ -87,14 +87,19 @@ curl https://sh.rustup.rs -sSf | sh
 source $HOME/.cargo/env
 rustup install nightly
 rustup default nightly
+cargo install rustfmt
 cargo install cargo-check
 cargo install cargo-edit
 cargo install cargo-graph
+cargo install cargo-modules
+cargo install cargo-tree
 cargo install clippy
+cargo install tokei
 curl "http://dl.dafont.com/dl/?f=sansation" -o sansation.zip >/dev/null
 unzip sansation.zip -d "$HOME/.fonts"
 rm -f sansation.zip
 \cp ".zshrc" "$HOME/.zshrc"
+\cp ".ctags" "$HOME/.ctags"
 git clone "https://github.com/zagortenay333/Harmattan" "$HOME/Harmattan"
 \cp -R "$HOME/Harmattan/.harmattan-assets/" "$HOME/.harmattan-assets/"
 rm -rf "$HOME/Harmattan"
@@ -102,6 +107,7 @@ rm -rf "$HOME/Harmattan"
 \cp ".conkyrc" "$HOME/.conkyrc"
 git clone "https://github.com/Valloric/YouCompleteMe.git" "$HOME/.config/nvim/plugged/YouCompleteMe"
 cd "$HOME/.config/nvim/plugged/YouCompleteMe"
+sed -ie "s/\/home\/efyang/\/home\/$USER/g" "$HOME/.config/nvim/init.vim"
 git submodule update --init --recursive
 RAM="${${${$(cat /proc/meminfo | grep MemTotal)%kB*}#MemTotal:}// /}"
 if [ "$RAM" -lt 4194304 ]; then
@@ -123,7 +129,8 @@ nvim -c "PlugInstall | :q | :q"
 ssh-keygen -t rsa -b 4096 -C "$EMAIL"
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
-
+ibus-daemon &
+photoqt --start-in-tray &
 git clone "https://raw.github.com/robbyrussell/oh-my-zsh/"
 rsync -av "./oh-my-zsh/" "$HOME/.oh-my-zsh/"
 rm -rf "./oh-my-zsh"

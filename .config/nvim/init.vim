@@ -115,11 +115,11 @@ noremap   <Right>  <NOP>
 "autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 " more shebang recognition
 set hidden
-let $RUST_SRC_PATH="$HOME/.config/nvim/plugged/rust/src/"
-let g:ycm_rust_src_path = "$HOME/.config/nvim/plugged/rust/src/"
+let $RUST_SRC_PATH="/home/efyang/.config/nvim/plugged/rust/src/"
+let g:ycm_rust_src_path = "/home/efyang/.config/nvim/plugged/rust/src/"
 AddShebangPattern! lua ^#!.*/bin/env\s\+lua\>
 AddShebangPattern! haskell ^#!.*/bin/env\s\+runhaskell\>
-let g:startify_change_to_dir = '$HOME'
+let g:startify_change_to_dir = "$HOME"
 filetype plugin indent on    " required
 set laststatus=2
 let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
@@ -188,8 +188,6 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-let g:syntastic_extra_filetypes = ['rust']
-let g:syntastic_rust_checkers = ['rust', 'rustc']
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set mouse=
 let g:indentLine_char = '│'
@@ -210,19 +208,19 @@ aug QFClose
 aug END
 ":ccl to close quickfix windows
 let g:cargo_command = "Dispatch cargo {cmd}"
-let g:tagbar_type_rust = {
-            \ 'ctagstype' : 'rust',
-            \ 'kinds' : [
-            \'T:types,type definitions',
-            \'f:functions,function definitions',
-            \'g:enum,enumeration names',
-            \'s:structure names',
-            \'m:modules,module names',
-            \'c:consts,static constants',
-            \'t:traits,traits',
-            \'i:impls,trait implementations',
-            \]
-            \}
+ let g:tagbar_type_rust = {
+    \ 'ctagstype' : 'rust',
+    \ 'kinds' : [
+        \'T:types,type definitions',
+        \'f:functions,function definitions',
+        \'g:enum,enumeration names',
+        \'s:structure names',
+        \'m:modules,module names',
+        \'c:consts,static constants',
+        \'t:traits,traits',
+        \'i:impls,trait implementations',
+    \]
+    \}
 " Set Colorscheme
 set background=dark
 colors gruvbox

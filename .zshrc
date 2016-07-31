@@ -85,3 +85,5 @@ export PATH=/home/honorabrutroll/.gem/ruby/2.3.0/bin:$PATH
 export BROWSER=/usr/bin/firefox-developer
 # added by travis gem
 [ -f /home/honorabrutroll/.travis/travis.sh ] && source /home/honorabrutroll/.travis/travis.sh
+export RUST_NEW_ERROR_FORMAT=1
+alias cloc=tokei

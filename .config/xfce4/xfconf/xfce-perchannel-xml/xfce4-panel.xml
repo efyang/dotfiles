@@ -34,31 +34,41 @@
     <property name="plugin-2" type="string" value="actions"/>
     <property name="plugin-6" type="string" value="systray">
       <property name="names-visible" type="array">
-        <value type="string" value="thunar"/>
-        <value type="string" value="vlc"/>
-        <value type="string" value="redshift-gtk"/>
-        <value type="string" value="docky"/>
-        <value type="string" value="lantern"/>
-        <value type="string" value="bomi"/>
-        <value type="string" value="networkmanager applet"/>
-        <value type="string" value="ario"/>
-        <value type="string" value="systray icon"/>
-        <value type="string" value="ibus-ui-gtk3"/>
-        <value type="string" value="ibus panel"/>
-        <value type="string" value="hexchat"/>
-        <value type="string" value="pragha music player"/>
-        <value type="string" value="pidgin"/>
-        <value type="string" value="pamac-tray"/>
-        <value type="string" value="clementine"/>
+        <value type="string" value="task manager"/>
         <value type="string" value="scudcloud"/>
         <value type="string" value="deluge"/>
+        <value type="string" value="ibus-ui-gtk3"/>
+        <value type="string" value="pamac-tray"/>
+        <value type="string" value="lantern"/>
+        <value type="string" value="osd lyrics"/>
+        <value type="string" value="scp-dbus-service.py"/>
+        <value type="string" value="vlc"/>
+        <value type="string" value="clementine"/>
         <value type="string" value="xfce4-power-manager"/>
-        <value type="string" value="task manager"/>
-        <value type="string" value="sonata"/>
-        <value type="string" value="clipgrab"/>
-        <value type="string" value="banshee"/>
-        <value type="string" value="slack"/>
+        <value type="string" value="thunar"/>
         <value type="string" value="qtalarm"/>
+        <value type="string" value="docky"/>
+        <value type="string" value="bomi"/>
+        <value type="string" value="pidgin"/>
+        <value type="string" value="hp-systray"/>
+        <value type="string" value="gtk-recordmydesktop"/>
+        <value type="string" value="systray icon"/>
+        <value type="string" value="pragha music player"/>
+        <value type="string" value="redshift-gtk"/>
+        <value type="string" value="clipgrab"/>
+        <value type="string" value="photoqt"/>
+        <value type="string" value="networkmanager applet"/>
+        <value type="string" value="slack"/>
+        <value type="string" value="hexchat"/>
+        <value type="string" value="."/>
+        <value type="string" value="banshee"/>
+        <value type="string" value="ario"/>
+        <value type="string" value="ibus panel"/>
+        <value type="string" value="notes"/>
+        <value type="string" value="sonata"/>
+        <value type="string" value="kazam"/>
+        <value type="string" value="yad"/>
+        <value type="string" value="kw player"/>
       </property>
       <property name="size-max" type="uint" value="30"/>
       <property name="names-hidden" type="array">
@@ -73,7 +83,7 @@
     </property>
     <property name="plugin-5" type="string" value="clock">
       <property name="timezone" type="string" value="America/Chicago"/>
-      <property name="digital-format" type="string" value="%I:%M %p"/>
+      <property name="digital-format" type="string" value="%A, %B %d, %I:%M %p"/>
     </property>
     <property name="plugin-8" type="string" value="separator">
       <property name="expand" type="bool" value="false"/>
