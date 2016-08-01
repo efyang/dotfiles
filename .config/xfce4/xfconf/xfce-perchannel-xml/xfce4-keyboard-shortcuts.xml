@@ -40,7 +40,7 @@
       <property name="&lt;Primary&gt;Left" type="string" value="clementine -r"/>
       <property name="&lt;Primary&gt;m" type="string" value="mate-system-monitor"/>
       <property name="Super_L" type="string" value="xfce4-popup-whiskermenu"/>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;Tab" type="string" value="skippy-xd --activate-window-picker"/>
+      <property name="&lt;Primary&gt;&lt;Alt&gt;Tab" type="string" value="skippy-xd --toggle-window-picker"/>
       <property name="&lt;Primary&gt;&lt;Shift&gt;f" type="string" value="xfce4-appfinder"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="string" value="sakura"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;space" type="string" value="clementine -t"/>
