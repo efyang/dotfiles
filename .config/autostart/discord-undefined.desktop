@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Exec=/opt/discord/discord
+Exec=/opt/discord-canary/DiscordCanary
 Hidden=false
 NoDisplay=false
-Name=discord
-Icon=/opt/discord/discord.png
+Name=DiscordCanary
+Icon=/opt/discord-canary/discord.png
 Comment=Text and voice chat for gamers.
 X-GNOME-Autostart-enabled=true
