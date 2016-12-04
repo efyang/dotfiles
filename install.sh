@@ -97,13 +97,16 @@ cargo install cargo-tree
 cargo install clippy
 cargo install tokei
 curl "http://dl.dafont.com/dl/?f=sansation" -o sansation.zip >/dev/null
+curl "https://fonts.google.com/download?family=Poiret%20One" -o poiretone.zip >/dev/null
 unzip sansation.zip -d "$HOME/.fonts"
+unzip poiretone.zip -d "$HOME/.fonts"
 rm -f sansation.zip
+rm -f poiretone.zip
 \cp ".zshrc" "$HOME/.zshrc"
 \cp ".ctags" "$HOME/.ctags"
-git clone "https://github.com/zagortenay333/Harmattan" "$HOME/Harmattan"
-\cp -R "$HOME/Harmattan/.harmattan-assets/" "$HOME/.harmattan-assets/"
-rm -rf "$HOME/Harmattan"
+git clone "https://github.com/zagortenay333/conky-Vision" "$HOME/conky-Vision"
+\cp -R "$HOME/conky-Vision/.conky-vision-icons/" "$HOME/.conky-vision-icons/"
+rm -rf "$HOME/conky-Vision"
 \cp -R ".screenlets/" "$HOME/.screenlets/"
 \cp ".conkyrc" "$HOME/.conkyrc"
 git clone "https://github.com/Valloric/YouCompleteMe.git" "$HOME/.config/nvim/plugged/YouCompleteMe"
