@@ -4,15 +4,15 @@
   <property name="backdrop" type="empty">
     <property name="screen0" type="empty">
       <property name="monitor0" type="empty">
-        <property name="image-path" type="string" value="/home/honorabrutroll/Pictures/wallpaper/24206732551_fda6b32d8b_o169.png"/>
+        <property name="image-path" type="string" value="/home/efyang/Downloads/sara_casen_uggla_owl.jpg"/>
         <property name="image-show" type="bool" value="true"/>
         <property name="image-style" type="int" value="0"/>
         <property name="brightness" type="int" value="63"/>
         <property name="saturation" type="double" value="0.000000"/>
         <property name="workspace0" type="empty">
           <property name="color-style" type="int" value="0"/>
-          <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/home/efyang/Pictures/backgrounds/rzMZRFt.jpg"/>
+          <property name="image-style" type="int" value="3"/>
+          <property name="last-image" type="string" value="/home/efyang/Pictures/backgrounds/35b368ebaa4943618faabb93fb0c4656.jpe"/>
           <property name="backdrop-cycle-enable" type="bool" value="false"/>
           <property name="backdrop-cycle-random-order" type="bool" value="true"/>
         </property>
@@ -46,7 +46,7 @@
     </property>
   </property>
   <property name="last" type="empty">
-    <property name="window-width" type="int" value="644"/>
+    <property name="window-width" type="int" value="652"/>
     <property name="window-height" type="int" value="534"/>
   </property>
   <property name="desktop-icons" type="empty">

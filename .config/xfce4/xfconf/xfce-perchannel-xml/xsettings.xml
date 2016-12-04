@@ -2,7 +2,7 @@
 
 <channel name="xsettings" version="1.0">
   <property name="Net" type="empty">
-    <property name="ThemeName" type="string" value="Adapta-Nokto"/>
+    <property name="ThemeName" type="string" value="Arc-Flatabulous-Dark"/>
     <property name="IconThemeName" type="string" value="Numix-Circle"/>
     <property name="DoubleClickTime" type="empty"/>
     <property name="DoubleClickDistance" type="empty"/>
@@ -14,16 +14,16 @@
     <property name="EnableInputFeedbackSounds" type="empty"/>
   </property>
   <property name="Xft" type="empty">
-    <property name="DPI" type="empty"/>
-    <property name="Antialias" type="empty"/>
+    <property name="DPI" type="int" value="96"/>
+    <property name="Antialias" type="int" value="1"/>
     <property name="Hinting" type="empty"/>
-    <property name="HintStyle" type="empty"/>
+    <property name="HintStyle" type="string" value="hintfull"/>
     <property name="RGBA" type="string" value="none"/>
   </property>
   <property name="Gtk" type="empty">
     <property name="CanChangeAccels" type="bool" value="false"/>
     <property name="ColorPalette" type="empty"/>
-    <property name="FontName" type="string" value="Sansation 10"/>
+    <property name="FontName" type="string" value="Sansation 10.5"/>
     <property name="IconSizes" type="empty"/>
     <property name="KeyThemeName" type="empty"/>
     <property name="ToolbarStyle" type="empty"/>
@@ -33,6 +33,9 @@
     <property name="MenuBarAccel" type="empty"/>
     <property name="CursorThemeName" type="string" value="DMZ-Black"/>
     <property name="CursorThemeSize" type="empty"/>
-    <property name="DecorationLayout" type="string" value=":minimize,maximize,close"/>
+    <property name="DecorationLayout" type="string" value="close,maximize,minimize:"/>
+  </property>
+  <property name="Xfce" type="empty">
+    <property name="LastCustomDPI" type="int" value="96"/>
   </property>
 </channel>

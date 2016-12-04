@@ -4,23 +4,33 @@
   <property name="panels" type="array">
     <value type="int" value="1"/>
     <property name="panel-1" type="empty">
-      <property name="size" type="int" value="29"/>
-      <property name="position" type="string" value="p=6;x=912;y=19"/>
-      <property name="length" type="uint" value="1"/>
+      <property name="size" type="uint" value="28"/>
+      <property name="position" type="string" value="p=2;x=1630;y=20"/>
+      <property name="length" type="uint" value="100"/>
       <property name="position-locked" type="bool" value="true"/>
       <property name="plugin-ids" type="array">
-        <value type="int" value="2"/>
+        <value type="int" value="3"/>
+        <value type="int" value="7"/>
+        <value type="int" value="9"/>
+        <value type="int" value="12"/>
+        <value type="int" value="13"/>
+        <value type="int" value="17"/>
         <value type="int" value="5"/>
+        <value type="int" value="15"/>
         <value type="int" value="8"/>
+        <value type="int" value="4"/>
         <value type="int" value="6"/>
+        <value type="int" value="10"/>
         <value type="int" value="1"/>
+        <value type="int" value="2"/>
+        <value type="int" value="16"/>
       </property>
-      <property name="disable-struts" type="bool" value="true"/>
+      <property name="disable-struts" type="bool" value="false"/>
       <property name="background-alpha" type="uint" value="0"/>
       <property name="mode" type="uint" value="0"/>
       <property name="nrows" type="uint" value="1"/>
       <property name="length-adjust" type="bool" value="true"/>
-      <property name="background-style" type="int" value="0"/>
+      <property name="background-style" type="uint" value="0"/>
       <property name="background-color" type="array">
         <value type="uint" value="56699"/>
         <value type="uint" value="56699"/>
@@ -28,19 +38,36 @@
         <value type="uint" value="65535"/>
       </property>
       <property name="background-image" type="string" value=""/>
+      <property name="autohide-behavior" type="uint" value="0"/>
     </property>
   </property>
   <property name="plugins" type="empty">
-    <property name="plugin-2" type="string" value="actions"/>
+    <property name="plugin-2" type="string" value="actions">
+      <property name="items" type="array">
+        <value type="string" value="+lock-screen"/>
+        <value type="string" value="+switch-user"/>
+        <value type="string" value="+separator"/>
+        <value type="string" value="+suspend"/>
+        <value type="string" value="-hibernate"/>
+        <value type="string" value="-separator"/>
+        <value type="string" value="+shutdown"/>
+        <value type="string" value="+restart"/>
+        <value type="string" value="+separator"/>
+        <value type="string" value="+logout"/>
+        <value type="string" value="-logout-dialog"/>
+      </property>
+    </property>
     <property name="plugin-6" type="string" value="systray">
       <property name="names-visible" type="array">
+        <value type="string" value="discord"/>
         <value type="string" value="task manager"/>
-        <value type="string" value="scudcloud"/>
         <value type="string" value="deluge"/>
-        <value type="string" value="ibus-ui-gtk3"/>
-        <value type="string" value="pamac-tray"/>
-        <value type="string" value="lantern"/>
+        <value type="string" value="scudcloud"/>
+        <value type="string" value="yakyak"/>
         <value type="string" value="osd lyrics"/>
+        <value type="string" value="lantern"/>
+        <value type="string" value="glade"/>
+        <value type="string" value="gajim"/>
         <value type="string" value="scp-dbus-service.py"/>
         <value type="string" value="vlc"/>
         <value type="string" value="clementine"/>
@@ -53,10 +80,11 @@
         <value type="string" value="hp-systray"/>
         <value type="string" value="gtk-recordmydesktop"/>
         <value type="string" value="systray icon"/>
-        <value type="string" value="pragha music player"/>
+        <value type="string" value="ss-qt5"/>
+        <value type="string" value="photoqt"/>
         <value type="string" value="redshift-gtk"/>
         <value type="string" value="clipgrab"/>
-        <value type="string" value="photoqt"/>
+        <value type="string" value="pragha music player"/>
         <value type="string" value="networkmanager applet"/>
         <value type="string" value="slack"/>
         <value type="string" value="hexchat"/>
@@ -69,11 +97,16 @@
         <value type="string" value="kazam"/>
         <value type="string" value="yad"/>
         <value type="string" value="kw player"/>
+        <value type="string" value="megasync"/>
       </property>
-      <property name="size-max" type="uint" value="30"/>
+      <property name="size-max" type="uint" value="22"/>
       <property name="names-hidden" type="array">
         <value type="string" value="screenlets-daemon.py"/>
+        <value type="string" value="albert"/>
+        <value type="string" value="ibus-ui-gtk3"/>
+        <value type="string" value="pamac-tray"/>
       </property>
+      <property name="show-frame" type="bool" value="false"/>
     </property>
     <property name="plugin-1" type="string" value="mixer">
       <property name="sound-card" type="string" value="HDAIntelPCHAlsamixer"/>
@@ -84,9 +117,54 @@
     <property name="plugin-5" type="string" value="clock">
       <property name="timezone" type="string" value="America/Chicago"/>
       <property name="digital-format" type="string" value="%A, %B %d, %I:%M %p"/>
+      <property name="mode" type="uint" value="2"/>
+    </property>
+    <property name="notes" type="empty">
+      <property name="global" type="empty">
+        <property name="font-description" type="string" value="Sansation 13"/>
+      </property>
+      <property name="new-window" type="empty">
+        <property name="width" type="int" value="300"/>
+        <property name="height" type="int" value="375"/>
+      </property>
+    </property>
+    <property name="plugin-10" type="string" value="wavelan"/>
+    <property name="plugin-3" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-4" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-7" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
     </property>
     <property name="plugin-8" type="string" value="separator">
-      <property name="expand" type="bool" value="false"/>
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-9" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-12" type="string" value="separator">
+      <property name="style" type="uint" value="1"/>
+    </property>
+    <property name="plugin-13" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-15" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-16" type="string" value="separator">
+      <property name="style" type="uint" value="1"/>
+    </property>
+    <property name="plugin-17" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
       <property name="style" type="uint" value="0"/>
     </property>
   </property>

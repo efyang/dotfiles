@@ -1,5 +1,5 @@
 [Configuration]
-FontName=Input Mono Medium 12
+FontName=Fira Mono Medium 11
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBordersDefault=TRUE
@@ -7,15 +7,20 @@ MiscCursorBlinks=FALSE
 MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK
 MiscDefaultGeometry=80x24
 MiscInheritGeometry=FALSE
-MiscMenubarDefault=TRUE
+MiscMenubarDefault=FALSE
 MiscMouseAutohide=FALSE
 MiscToolbarDefault=FALSE
-MiscConfirmClose=TRUE
+MiscConfirmClose=FALSE
 MiscCycleTabs=TRUE
 MiscTabCloseButtons=TRUE
 MiscTabCloseMiddleClick=TRUE
 MiscTabPosition=GTK_POS_TOP
 MiscHighlightUrls=TRUE
 BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
-BackgroundDarkness=0.800000
+BackgroundDarkness=0.750000
+MiscMiddleClickOpensUri=FALSE
+ColorCursor=#ffffffffffff
+TitleMode=TERMINAL_TITLE_REPLACE
+MiscBellUrgent=FALSE
+MiscDefaultWorkingDir=
 

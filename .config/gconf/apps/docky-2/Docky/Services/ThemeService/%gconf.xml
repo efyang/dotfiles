@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <gconf>
-	<entry name="Theme" mtime="1469919906" type="string">
+	<entry name="Theme" mtime="1480815547" type="string">
 		<stringvalue>Transparent</stringvalue>
 	</entry>
 </gconf>
