@@ -30,7 +30,7 @@ Plug 'guns/vim-clojure-static', {'for' : 'clojure'}
 Plug 'LaTeX-Box-Team/LaTeX-Box', {'for' : 'LaTeX'}
 Plug 'vitalk/vim-shebang'
 Plug 'cespare/vim-toml', {'for' : 'toml'}
-Plug 'rhysd/rust-doc.vim', {'for': 'rust', 'do' : 'rm -f rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && rm -rf $HOME/Documents/rust-docs && wget -q https://static.rust-lang.org/dist/rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && tar xf rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && mv rust-docs-nightly-x86_64-unknown-linux-gnu/rust-docs $HOME/Documents/ && rm -f rust-docs-nightly-x86_64-unknown-linux-gnu.tar.gz && rm -rf rust-docs-nightly-x86_64-unknown-linux-gnu'}
+Plug 'rhysd/rust-doc.vim', {'for': 'rust'}
 " Colorschemes
 Plug 'bronson/vim-crosshairs'
 Plug 'geoffharcourt/one-dark.vim'
@@ -40,6 +40,7 @@ Plug 'junegunn/seoul256.vim'
 Plug 'rhysd/wallaby.vim'
 Plug 'morhetz/gruvbox'
 " Exterior addons
+Plug 'chaoren/vim-wordmotion'
 Plug 'bling/vim-airline'
 Plug 'ryanss/vim-hackernews', {'on': 'HackerNews'}
 Plug 'itchyny/calendar.vim', {'on': 'Calendar'}

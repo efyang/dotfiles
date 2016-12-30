@@ -89,13 +89,13 @@ source $HOME/.cargo/env
 rustup install nightly
 rustup default nightly
 cargo install rustfmt
-cargo install cargo-check
 cargo install cargo-edit
 cargo install cargo-graph
 cargo install cargo-modules
 cargo install cargo-tree
 cargo install clippy
 cargo install tokei
+ln -s "$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/" "$HOME/Documents/rust-docs"
 curl "http://dl.dafont.com/dl/?f=sansation" -o sansation.zip >/dev/null
 curl "https://fonts.google.com/download?family=Poiret%20One" -o poiretone.zip >/dev/null
 unzip sansation.zip -d "$HOME/.fonts"
@@ -127,8 +127,6 @@ git clone "https://github.com/bhilburn/powerlevel9k" "$HOME/.oh-my-zsh/custom/po
 # clear unused
 sudo pacman -Rns $(pacman -Qtdq) --noconfirm
 sudo pacman -Scc --noconfirm
-nvim -c "PlugInstall | :q | :q"
-
 # gen ssh key for github
 ssh-keygen -t rsa -b 4096 -C "$EMAIL"
 eval "$(ssh-agent -s)"
@@ -139,3 +137,5 @@ git clone "https://raw.github.com/robbyrussell/oh-my-zsh/"
 rsync -av "./oh-my-zsh/" "$HOME/.oh-my-zsh/"
 rm -rf "./oh-my-zsh"
 chsh -s "/usr/bin/zsh"
+
+nvim -c "PlugInstall | :q | :q"
