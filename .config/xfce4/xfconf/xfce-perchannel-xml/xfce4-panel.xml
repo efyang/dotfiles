@@ -72,6 +72,7 @@
         <value type="string" value="vlc"/>
         <value type="string" value="clementine"/>
         <value type="string" value="xfce4-power-manager"/>
+        <value type="string" value="discordcanary"/>
         <value type="string" value="thunar"/>
         <value type="string" value="qtalarm"/>
         <value type="string" value="docky"/>
@@ -79,8 +80,8 @@
         <value type="string" value="pidgin"/>
         <value type="string" value="hp-systray"/>
         <value type="string" value="gtk-recordmydesktop"/>
-        <value type="string" value="systray icon"/>
         <value type="string" value="ss-qt5"/>
+        <value type="string" value="systray icon"/>
         <value type="string" value="photoqt"/>
         <value type="string" value="redshift-gtk"/>
         <value type="string" value="clipgrab"/>
