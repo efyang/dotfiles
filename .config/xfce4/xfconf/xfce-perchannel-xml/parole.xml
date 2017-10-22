@@ -5,7 +5,6 @@
     <property name="font" type="string" value="Sans Bold 20"/>
   </property>
   <property name="folders" type="empty">
-    <property name="last-used-media" type="string" value="/home/efyang/storage/xg/testing/yui kasumi"/>
   </property>
   <property name="window" type="empty">
     <property name="maximized" type="bool" value="true"/>

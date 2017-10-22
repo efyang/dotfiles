@@ -1,0 +1,4 @@
+Version=1.5.1
+0::Ctrl+Middle Button::__zoomReset
+0::Ctrl+Wheel Down::__zoomOut
+0::Ctrl+Wheel Up::__zoomIn

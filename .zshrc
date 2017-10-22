@@ -80,10 +80,24 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export PATH=$PATH:$HOME/.nvim/plugged/rust.vim/syntax_checkers/rust/
 export PATH=$HOME/pi-tools/rust-on-raspberry-pi:/home/honorabrutroll/pi-tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin:$PATH
+export PATH=$HOME/.multirust/toolchains/nightly/cargo/bin:$PATH
 alias reflupdate='sudo reflector --verbose --country 'United States'  -l 5 -p http --sort rate --threads 1 --save /etc/pacman.d/mirrorlist && yaourt -Syy'
 export PATH=/home/honorabrutroll/.gem/ruby/2.3.0/bin:$PATH
 export BROWSER=/usr/bin/firefox-developer
 # added by travis gem
 [ -f /home/honorabrutroll/.travis/travis.sh ] && source /home/honorabrutroll/.travis/travis.sh
 export RUST_NEW_ERROR_FORMAT=1
+export CARGO_INCREMENTAL=1
+#export RUSTDOCFLAGS="-Z unstable-options --extend-css $HOME/scripts/rustdoc_ayu.css"
+#eval "$(nodenv init -)"
 alias cloc=tokei
+alias grep=rg
+alias ls=exa
+alias update=/home/efyang/scripts/update
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+PATH="/home/efyang/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/efyang/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/efyang/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/efyang/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/efyang/perl5"; export PERL_MM_OPT;

@@ -12,14 +12,13 @@ call plug#begin('$HOME/.config/nvim/plugged')
 Plug 'pangloss/vim-javascript',{'for' : ['javascript', 'html5', 'html']}
 Plug 'tpope/vim-markdown',{'for' : 'markdown'}
 Plug 'othree/html5.vim',{'for' : 'html5'}
-Plug 'rstacruz/sparkup', {'rtp': 'vim/', 'for' : ['css', 'html5', 'html']},
+"Plug 'rstacruz/sparkup', {'rtp': 'vim/', 'for' : ['css', 'html5', 'html']},
 Plug 'elzr/vim-json', {'for' : 'json'}
 Plug 'derekwyatt/vim-scala', {'for' : 'scala'}
 Plug 'fatih/vim-go', {'for' : 'go'}
 Plug 'rust-lang/rust.vim', {'for' : 'rust'}
 Plug 'mattn/webapi-vim', {'for' : 'rust'}
-Plug 'rust-lang/rust', {'for': 'none'}
-Plug 'Valloric/YouCompleteMe', { 'do': 'YCM_CORES=2 python2 ./install.py --clang-completer --racer-completer' }
+"Plug 'Valloric/YouCompleteMe', { 'do': 'YCM_CORES=2 python2 ./install.py --clang-completer --racer-completer' }
 Plug 'lukerandall/haskellmode-vim', {'for' : 'haskell'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for' : 'cpp'}
 Plug 'ap/vim-css-color', {'for' : ['javascript', 'html5', 'html']}
@@ -30,7 +29,24 @@ Plug 'guns/vim-clojure-static', {'for' : 'clojure'}
 Plug 'LaTeX-Box-Team/LaTeX-Box', {'for' : 'LaTeX'}
 Plug 'vitalk/vim-shebang'
 Plug 'cespare/vim-toml', {'for' : 'toml'}
-Plug 'rhysd/rust-doc.vim', {'for': 'rust'}
+Plug 'daeyun/vim-matlab', {'for': 'matlab'}
+"Plug 'rhysd/rust-doc.vim', {'for': 'rust'}
+" Completion
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neco-vim', {'for': 'vim'}
+Plug 'zchee/deoplete-jedi', {'for': 'python'}
+Plug 'zchee/deoplete-clang', {'for': ['c', 'cpp']}
+Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
+
+" Language server
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+" (Optional) Multi-entry selection UI.
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+" (Optional) Showing function signature and inline doc.
+Plug 'Shougo/echodoc.vim'
+
 " Colorschemes
 Plug 'bronson/vim-crosshairs'
 Plug 'geoffharcourt/one-dark.vim'
@@ -39,6 +55,7 @@ Plug 'Yggdroot/indentline'
 Plug 'junegunn/seoul256.vim'
 Plug 'rhysd/wallaby.vim'
 Plug 'morhetz/gruvbox'
+
 " Exterior addons
 Plug 'chaoren/vim-wordmotion'
 Plug 'bling/vim-airline'
@@ -66,7 +83,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
 Plug 'radenling/vim-dispatch-neovim'
-Plug 'timonv/vim-cargo', {'for' : 'rust'}
+"Plug 'timonv/vim-cargo', {'for' : 'rust'}
 Plug 'tomtom/quickfixsigns_vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'danro/rename.vim'
@@ -76,6 +93,28 @@ Plug 'tpope/vim-fugitive'
 Plug 'L9'
 Plug 'Chiel92/vim-autoformat'
 Plug 'majutsushi/tagbar'
+
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'ntpeters/vim-better-whitespace'
+autocmd BufEnter * EnableStripWhitespaceOnSave
+Plug 'https://github.com/rhysd/committia.vim.git'     " Better commiting messageing
+let g:committia_open_only_vim_starting = 1
+let g:committia_hooks = {}
+function! g:committia_hooks.edit_open(info)
+  " Additional settings
+  setlocal spell
+
+  " If no commit message, start with insert mode
+  if a:info.vcs ==# 'git' && getline(1) ==# ''
+    startinsert
+  end
+
+  " Scroll the diff window from insert mode
+  " Map <C-n> and <C-p>
+  imap <buffer><C-n> <Plug>(committia-scroll-diff-down-half)
+  imap <buffer><C-p> <Plug>(committia-scroll-diff-up-half)
+endfunction
+
 "Plug 'severin-lemaignan/vim-minimap'
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'ctrlpvim/ctrlp.vim'
@@ -116,15 +155,27 @@ noremap   <Right>  <NOP>
 "autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 " more shebang recognition
 set hidden
-let $RUST_SRC_PATH="/home/efyang/.config/nvim/plugged/rust/src/"
-let g:ycm_rust_src_path = "/home/efyang/.config/nvim/plugged/rust/src/"
+let $RUST_SRC_PATH="/home/efyang/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
+"let g:ycm_rust_src_path = "/home/efyang/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
 AddShebangPattern! lua ^#!.*/bin/env\s\+lua\>
 AddShebangPattern! haskell ^#!.*/bin/env\s\+runhaskell\>
 let g:startify_change_to_dir = "$HOME"
 filetype plugin indent on    " required
 set laststatus=2
 let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
-let g:UltiSnipsExpandTrigger="<tab>"
+
+" Ultisnips
+let g:UltisnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:deoplete#sources={}
+let g:deoplete#sources._=['buffer', 'file', 'ultisnips', 'LanguageClient']
+let g:deoplete#sources.c=['buffer', 'file', 'ultisnips', 'deoplete-clang']
+let g:deoplete#sources.cpp=['buffer', 'file', 'ultisnips', 'deoplete-clang']
+let g:deoplete#sources.py=['buffer', 'file', 'ultisnips', 'deoplete-jedi']
+let g:deoplete#sources.vim=['buffer', 'file', 'ultisnips', 'neco-vim']
+let g:deoplete#enable_refresh_always=1
+
 " Syntastic defaults
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -139,9 +190,9 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
+let g:airline_left_sep = ' '
 let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
+let g:airline_right_sep = ' '
 let g:airline_symbols.linenr = '␊'
 let g:airline_symbols.linenr = '␤'
 let g:airline_symbols.linenr = '¶'
@@ -158,7 +209,7 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 nnoremap <leader>k :bnext<CR>
 nnoremap <leader>j :bprev<CR>
 
-"autostarts NERDTree 
+"autostarts NERDTree
 function StartupFns()
     if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | e
     endif
@@ -170,12 +221,12 @@ autocmd vimenter * :call AutoPairsInit()
 let g:AutoPairs = {'(': ')', '[': ']', '{': '}', '<': '>', "'": "'", '"': '"', '`': '`'}
 
 "nmap <F9> :MinimapToggle<CR>
-nmap <F10> :CargoBuild<CR>
+"nmap <F10> :CargoBuild<CR>
 nmap <F9> :Autoformat<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F7> :Goyo<CR>
 nmap <F6> :NERDTreeToggle<CR>
-nmap <c-w> <c-w><c-w>
+"nmap <c-w> <c-w><c-w>
 
 "Goyo/limelight focus config
 autocmd User GoyoEnter Limelight
@@ -201,6 +252,7 @@ let g:ctrlp_cmd = 'CtrlP'
 "set cursorline
 "setlocal tags=rusty-tags.vi;/,path-to-rust-source-code/rusty-tags.vi
 "autocmd BufWrite *.rs :silent !rusty-tags vi
+" already symlinked to rustup
 let g:rust_doc#downloaded_rust_doc_dir = '$HOME/Documents/rust-docs'
 "quit if only quickfix windows left
 aug QFClose
@@ -222,6 +274,85 @@ let g:cargo_command = "Dispatch cargo {cmd}"
         \'i:impls,trait implementations',
     \]
     \}
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+" Let <Tab> also do completion
+"inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+"inoremap <silent><expr> <Tab>
+"\ pumvisible() ? "\<C-n>" :
+"\ deoplete#mappings#manual_complete()
+
+" Close the documentation window when completion is done
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+autocmd CompleteDone * pclose!
+" Language server stuff
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls']
+    \ }
+let g:LanguageClient_autoStart=1
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+set cmdheight=2
+
+let g:SuperTabDefaultCompletionType = "<c-n>" " Make the tabing on completion menu go from top to bottom
+let g:SuperTabClosePreviewOnPopupClose = 1 " Close the preview when completion ends
+" Don't map any tabs, I'll do it later
+let g:UltiSnipsExpandTrigger = '<c-j>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+let g:SuperTabMappingForward = '<tab>'
+let g:SuperTabMappingBackward = '<s-tab>'
+" Don't unmap my mappings
+let g:UltiSnipsMappingsToIgnore = [ "SmartTab", "SmartShiftTab" ]
+
+" Make <CR> smart
+"let g:ulti_expand_res = 0
+"function! Ulti_ExpandOrEnter()
+  "call UltiSnips#ExpandSnippet()
+  "if g:ulti_expand_res
+    "return ''
+  "elseif pumvisible()
+    "return deoplete#mappings#close_popup()
+  "else
+    "return "\<return>"
+  "endif
+"endfunction
+"inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
+
+ "Enable tabbing and shift-tabbing through list of results
+"function! g:SmartTab()
+  "if pumvisible()
+    "return SuperTab("n")
+  "else
+    "call UltiSnips#JumpForwards()
+    "if g:ulti_jump_forwards_res == 0
+      "return SuperTab("n")
+    "endif
+    "return ''
+  "endif
+"endfunction
+"inoremap <silent> <tab> <C-R>=g:SmartTab()<cr>
+"snoremap <silent> <tab> <Esc>:call g:SmartTab()<cr>
+
+"function! g:SmartShiftTab()
+  "if pumvisible()
+    "return SuperTab("p")
+  "else
+    "call UltiSnips#JumpBackwards()
+    "if g:ulti_jump_backwards_res == 0
+      "return SuperTab("p")
+    "endif
+    "return ''
+  "endif
+"endfunction
+"inoremap <silent> <s-tab> <C-R>=g:SmartShiftTab()<cr>
+"snoremap <silent> <s-tab> <Esc>:call g:SmartShiftTab()<cr>
+
+nnoremap <F5> :e<CR>
+
 " Set Colorscheme
 set background=dark
 colors gruvbox

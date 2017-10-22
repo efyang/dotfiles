@@ -58,10 +58,10 @@ done &
 
 sudo dirmngr &
 sudo pacman-key --refresh-keys
-sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang docky intel-ucode i3lock i3status ibus ibus-sunpinyin graphviz jq ttf-droid ttf-fira-mono ttf-fira-sans adobe-source-han-sans-cn-fonts xfce4-goodies gvfs gvfs-smb intellij-idea-community-edition mate-system-monitor clementine flashplugin qalculate-gtk arc-gtk-theme deluge krita gimp xclip ninja python2-pip python-pip mesa-demos xorg-drivers redshift adobe-source-code-pro-fonts reflector networkmanager-openconnect screenfetch screenlets rsync gparted python-pyqt5 audacity bless ripgrep cheese fftw gource lshw networkmanager-openconnect networkmanager-openvpn opencv --noconfirm
+sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang docky intel-ucode i3lock i3status ibus ibus-sunpinyin graphviz jq ttf-droid ttf-fira-mono ttf-fira-sans adobe-source-han-sans-cn-fonts xfce4-goodies gvfs gvfs-smb intellij-idea-community-edition mate-system-monitor clementine flashplugin qalculate-gtk arc-gtk-theme deluge krita gimp xclip ninja python2-pip python-pip mesa-demos xorg-drivers redshift adobe-source-code-pro-fonts reflector networkmanager-openconnect screenfetch screenlets rsync gparted python-pyqt5 audacity bless ripgrep cheese fftw gource lshw networkmanager-openconnect networkmanager-openvpn opencv asciinema rustfmt tokei python-jedi python2-jedi openal --noconfirm
 gpg --keyserver http://pgp.mit.edu --recv-keys 0x4E2C6E8793298290
 sudo pacman -Rns pragha numix-icon-theme numix-icon-theme-square --noconfirm
-yaourt -S firefox-developer freshplayerplugin i3-gaps-next-git dmenu2 albert atom-editor-bin libtinfo skippy-xd-git sublime-text-dev photoqt tor-browser-en thermald gtk-theme-adapta-git lightdm-webkit-theme-material-git numix-circle-icon-theme-git gtk-arc-flatabulous-theme-git discord-canary downgrade kwplayer --noconfirm
+yaourt -S firefox-developer freshplayerplugin i3-gaps-next-git dmenu2 albert atom-editor-bin libtinfo skippy-xd-git sublime-text-dev photoqt tor-browser-en thermald gtk-theme-adapta-git lightdm-webkit-theme-material-git numix-circle-icon-theme-git gtk-arc-flatabulous-theme-git discord-canary downgrade kwplayer screencloud emojione-color-font xfce4-volumed-pulse jdownloader2 tilp --noconfirm
 sudo ln -s /usr/lib/libtinfo.so /usr/lib/libtinfo.so.5
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo systemctl start thermald
@@ -84,18 +84,22 @@ git config --global user.name "$NAME"
 git config --global user.email "$EMAIL"
 git config --global push.default simple
 sudo pip install argparse
+wget "https://raw.githubusercontent.com/Cldfire/ayu-rs/master/css/rustdoc.css" -O "$HOME/scripts/rustdoc_ayu.css"
 curl https://sh.rustup.rs -sSf | sh -s -- -y
 source $HOME/.cargo/env
 rustup install nightly
 rustup default nightly
-cargo install rustfmt
+rustup component add rust-analysis
+rustup component add rust-src
+rustup component add rls
 cargo install cargo-edit
 cargo install cargo-graph
 cargo install cargo-modules
 cargo install cargo-tree
+cargo install cargo-update
 cargo install clippy
-cargo install tokei
-ln -s "$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/" "$HOME/Documents/rust-docs"
+cargo install exa
+ln -s "$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/share/doc/rust/html/" "$HOME/Documents/rust-docs"
 curl "http://dl.dafont.com/dl/?f=sansation" -o sansation.zip >/dev/null
 curl "https://fonts.google.com/download?family=Poiret%20One" -o poiretone.zip >/dev/null
 unzip sansation.zip -d "$HOME/.fonts"
@@ -109,15 +113,15 @@ git clone "https://github.com/zagortenay333/conky-Vision" "$HOME/conky-Vision"
 rm -rf "$HOME/conky-Vision"
 \cp -R ".screenlets/" "$HOME/.screenlets/"
 \cp ".conkyrc" "$HOME/.conkyrc"
-git clone "https://github.com/Valloric/YouCompleteMe.git" "$HOME/.config/nvim/plugged/YouCompleteMe"
-cd "$HOME/.config/nvim/plugged/YouCompleteMe"
+#git clone "https://github.com/Valloric/YouCompleteMe.git" "$HOME/.config/nvim/plugged/YouCompleteMe"
+#cd "$HOME/.config/nvim/plugged/YouCompleteMe"
 sed -ie "s/\/home\/efyang/\/home\/$USER/g" "$HOME/.config/nvim/init.vim"
-git submodule update --init --recursive
-RAM="${${${$(cat /proc/meminfo | grep MemTotal)%kB*}#MemTotal:}// /}"
-if [ "$RAM" -lt 4194304 ]; then
-    export YCM_CORES=2
-fi
-python2 ./install.py --clang-complete --racer-complete
+#git submodule update --init --recursive
+#RAM="${${${$(cat /proc/meminfo | grep MemTotal)%kB*}#MemTotal:}// /}"
+#if [ "$RAM" -lt 4194304 ]; then
+    #export YCM_CORES=2
+#fi
+#python2 ./install.py --clang-complete --racer-complete
 cd "$HOME"
 if xinput list | grep -Fq "Synaptics"
 then
@@ -136,6 +140,5 @@ photoqt --start-in-tray &
 git clone "https://github.com/robbyrussell/oh-my-zsh/"
 rsync -av "./oh-my-zsh/" "$HOME/.oh-my-zsh/"
 rm -rf "./oh-my-zsh"
+nvim +PlugInstall +UpdateRemotePlugins +qa
 chsh -s "/usr/bin/zsh"
-
-nvim -c "PlugInstall | :q | :q"

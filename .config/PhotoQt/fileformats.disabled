@@ -1,7 +1,9 @@
+*.avs
 *.x
 *.cals
 *.cal
 *.dcl
+*.ras
 *.epdf
 *.mono
 *.pict

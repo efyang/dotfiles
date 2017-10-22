@@ -13,11 +13,15 @@
     <property name="lid-action-on-ac" type="uint" value="1"/>
     <property name="show-tray-icon" type="bool" value="true"/>
     <property name="presentation-mode" type="bool" value="false"/>
-    <property name="dpms-on-battery-off" type="uint" value="31"/>
-    <property name="dpms-on-battery-sleep" type="uint" value="20"/>
-    <property name="blank-on-battery" type="int" value="10"/>
+    <property name="dpms-on-battery-off" type="uint" value="21"/>
+    <property name="dpms-on-battery-sleep" type="uint" value="8"/>
+    <property name="blank-on-battery" type="int" value="6"/>
     <property name="brightness-on-battery" type="uint" value="9"/>
     <property name="lock-screen-suspend-hibernate" type="bool" value="true"/>
-    <property name="general-notification" type="bool" value="false"/>
+    <property name="general-notification" type="bool" value="true"/>
+    <property name="handle-brightness-keys" type="bool" value="true"/>
+    <property name="sleep-button-action" type="uint" value="1"/>
+    <property name="hibernate-button-action" type="uint" value="2"/>
+    <property name="power-button-action" type="uint" value="3"/>
   </property>
 </channel>

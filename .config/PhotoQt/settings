@@ -1,4 +1,4 @@
-Version=1.4.1.1
+Version=1.5.1
 Language=en
 WindowMode=0
 WindowDecoration=0
@@ -6,6 +6,9 @@ MyWidgetAnimated=1
 SaveWindowGeometry=0
 KeepOnTop=0
 KnownFileTypesQtExtras=
+OpenOnScreen=0
+OpenOnScreenName=eDP1
+StartupLoadLastLoadedImage=0
 
 [Look]
 Composite=1
@@ -24,7 +27,7 @@ BackgroundImageTile=0
 
 [Behaviour]
 TrayIcon=1
-Transition=0
+Transition=1
 LoopThroughFolder=1
 MenuSensitivity=4
 CloseOnGrey=1
@@ -32,15 +35,15 @@ BorderAroundImg=8
 QuickSettings=1
 SortImagesBy=name
 SortImagesAscending=1
-MouseWheelSensitivity=1
-RememberRotation=0
-RememberZoom=0
+MouseWheelSensitivity=8
+KeepZoomRotationMirror=0
 FitInWindow=0
 InterpolationNearestNeighbourThreshold=100
 InterpolationNearestNeighbourUpscale=0
-BlurIntensity=2
-PixmapCache=25
-ExperimentalTouchscreenSupport=0
+BlurIntensity=8
+PixmapCache=128
+LeftButtonMouseClickAndMove=1
+SingleFingerTouchPressAndMove=1
 
 [Quickinfo]
 HideCounter=0
@@ -58,7 +61,6 @@ ThbCacheFile=0
 ThumbnailSpacingBetween=0
 ThumbnailLiftUp=6
 ThumbnailKeepVisible=0
-ThumbnailDynamic=2
 ThumbnailCenterActive=0
 ThumbnailFilenameInstead=0
 ThumbnailFilenameInsteadFontSize=8
@@ -86,6 +88,7 @@ ExifOpacity=200
 ExifFilename=1
 ExifFiletype=1
 ExifFilesize=1
+ExifImageNumber=1
 ExifDimensions=1
 ExifMake=1
 ExifModel=1
@@ -118,6 +121,12 @@ OpenUserPlacesStandard=1
 OpenUserPlacesUser=1
 OpenUserPlacesVolumes=1
 OpenKeepLastLocation=0
+
+[Histogram]
+Histogram=0
+HistogramVersion=color
+HistogramPosition=100,100
+HistogramSize=300,200
 
 [Other]
 ExifMetadaWindowWidth=350
