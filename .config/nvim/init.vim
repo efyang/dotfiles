@@ -90,7 +90,6 @@ Plug 'danro/rename.vim'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-fugitive'
-Plug 'L9'
 Plug 'Chiel92/vim-autoformat'
 Plug 'majutsushi/tagbar'
 
