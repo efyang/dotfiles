@@ -1,5 +1,5 @@
 [Configuration]
-FontName=Source Code Pro Medium 11
+FontName=Source Code Pro Medium 10
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBordersDefault=TRUE
@@ -17,9 +17,8 @@ MiscTabCloseMiddleClick=TRUE
 MiscTabPosition=GTK_POS_TOP
 MiscHighlightUrls=TRUE
 BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
-BackgroundDarkness=0.700000
+BackgroundDarkness=0.800000
 MiscMiddleClickOpensUri=FALSE
-ColorCursor=#ffffffffffff
 TitleMode=TERMINAL_TITLE_REPLACE
 MiscBellUrgent=FALSE
 MiscDefaultWorkingDir=
@@ -29,6 +28,9 @@ MiscRewrapOnResize=TRUE
 MiscUseShiftArrowsToScroll=FALSE
 MiscSlimTabs=FALSE
 ScrollingOnOutput=FALSE
-ColorBackground=#000000000000
 ShortcutsNoMenukey=TRUE
+ColorForeground=#dcdcdc
+ColorBackground=#2c2c2c
+ColorCursor=#dcdcdc
+ColorPalette=#3f3f3f;#705050;#60b48a;#dfaf8f;#9ab8d7;#dc8cc3;#8cd0d3;#dcdcdc;#709080;#dca3a3;#72d5a3;#f0dfaf;#94bff3;#ec93d3;#93e0e3;#ffffff
 

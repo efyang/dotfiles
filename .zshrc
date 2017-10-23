@@ -83,7 +83,7 @@ export PATH=$HOME/pi-tools/rust-on-raspberry-pi:/home/honorabrutroll/pi-tools/ar
 export PATH=$HOME/.multirust/toolchains/nightly/cargo/bin:$PATH
 alias reflupdate='sudo reflector --verbose --country 'United States'  -l 5 -p http --sort rate --threads 1 --save /etc/pacman.d/mirrorlist && yaourt -Syy'
 export PATH=/home/honorabrutroll/.gem/ruby/2.3.0/bin:$PATH
-export BROWSER=/usr/bin/firefox-developer
+export BROWSER=/usr/bin/firefox-nightly
 # added by travis gem
 [ -f /home/honorabrutroll/.travis/travis.sh ] && source /home/honorabrutroll/.travis/travis.sh
 export RUST_NEW_ERROR_FORMAT=1
