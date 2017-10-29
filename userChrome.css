@@ -1,0 +1,17 @@
+@-moz-document url("chrome://browser/content/browser.xul") {
+    #TabsToolbar {
+        visibility: collapse;
+    }
+
+    #tabbrowser-tabs {
+        visibility: collapse;
+    }
+
+    #sidebar-header {
+        visibility: collapse;
+    }
+
+    #sidebar {
+        min-width:0px !important; max-width:none !important;
+    }
+}

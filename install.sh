@@ -66,7 +66,7 @@ gpg --recv-key BBBEBDBB24C6F355
 gpg --recv-key D1483FA6C3C07136
 sudo pacman -Rns pragha --noconfirm
 sudo pacman -Rns numix-icon-theme numix-icon-theme-square --noconfirm
-yaourt -S firefox-developer i3-gaps-next-git dmenu2 albert atom-editor-bin skippy-xd-git sublime-text-dev photoqt tor-browser-en thermald lightdm-webkit-theme-material-git gtk-arc-flatabulous-theme-git discord-canary downgrade kwplayer screencloud xfce4-volumed-pulse jdownloader2 tilp ttf-emojione-color firefox-nightly ttf-ms-fonts --noconfirm
+yaourt -S firefox-developer i3-gaps-next-git dmenu2 albert atom-editor-bin skippy-xd-git sublime-text-dev photoqt tor-browser-en thermald lightdm-webkit-theme-material-git gtk-arc-flatabulous-theme-git discord-canary downgrade kwplayer screencloud xfce4-volumed-pulse jdownloader2 tilp ttf-emojione-color firefox-nightly ttf-ms-fonts yakyak --noconfirm
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo systemctl start thermald
 sudo systemctl enable thermald
