@@ -95,7 +95,7 @@ alias grep=rg
 alias ls=exa
 alias update=/home/efyang/scripts/update
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+export RUSTC_WRAPPER=sccache
 PATH="/home/efyang/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/efyang/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/home/efyang/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;

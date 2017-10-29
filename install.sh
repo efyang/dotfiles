@@ -99,6 +99,7 @@ rustup default nightly
 rustup component add rust-analysis
 rustup component add rust-src
 rustup component add rls-preview
+cargo install sccache
 cargo install cargo-edit
 cargo install cargo-graph
 cargo install cargo-modules
@@ -149,4 +150,5 @@ rsync -av "./oh-my-zsh/" "$HOME/.oh-my-zsh/"
 rm -rf "./oh-my-zsh"
 nvim +PlugInstall +UpdateRemotePlugins +qa
 rm -rf ~/.cache/sessions
+mkdir -p ~/projects
 chsh -s "/usr/bin/zsh"
