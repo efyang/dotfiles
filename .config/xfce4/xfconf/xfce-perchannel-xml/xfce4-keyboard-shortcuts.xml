@@ -153,15 +153,15 @@
       <property name="&lt;Primary&gt;&lt;Alt&gt;KP_4" type="string" value="move_window_workspace_4_key"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;KP_5" type="string" value="move_window_workspace_5_key"/>
       <property name="override" type="bool" value="true"/>
+      <property name="&lt;Primary&gt;KP_Up" type="string" value="tile_up_key"/>
+      <property name="&lt;Primary&gt;KP_Down" type="string" value="tile_down_key"/>
+      <property name="&lt;Primary&gt;KP_Left" type="string" value="tile_left_key"/>
+      <property name="&lt;Primary&gt;KP_Right" type="string" value="tile_right_key"/>
+      <property name="&lt;Primary&gt;KP_Home" type="string" value="tile_up_left_key"/>
+      <property name="&lt;Primary&gt;KP_Page_Up" type="string" value="tile_up_right_key"/>
+      <property name="&lt;Primary&gt;KP_End" type="string" value="tile_down_left_key"/>
+      <property name="&lt;Primary&gt;KP_Page_Down" type="string" value="tile_down_right_key"/>
       <property name="&lt;Primary&gt;l" type="string" value="maximize_window_key"/>
-      <property name="&lt;Primary&gt;Up" type="string" value="tile_up_key"/>
-      <property name="&lt;Primary&gt;Down" type="string" value="tile_down_key"/>
-      <property name="&lt;Primary&gt;Left" type="string" value="tile_left_key"/>
-      <property name="&lt;Primary&gt;Right" type="string" value="tile_right_key"/>
-      <property name="&lt;Primary&gt;&lt;Shift&gt;Left" type="string" value="tile_down_left_key"/>
-      <property name="&lt;Primary&gt;&lt;Shift&gt;Right" type="string" value="tile_down_right_key"/>
-      <property name="&lt;Primary&gt;&lt;Shift&gt;braceleft" type="string" value="tile_up_left_key"/>
-      <property name="&lt;Primary&gt;&lt;Shift&gt;braceright" type="string" value="tile_up_right_key"/>
     </property>
   </property>
   <property name="providers" type="array">

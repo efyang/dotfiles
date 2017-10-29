@@ -64,9 +64,11 @@
     </property>
     <property name="plugin-29" type="string" value="systray">
       <property name="names-visible" type="array">
+        <value type="string" value="task manager"/>
         <value type="string" value="deluge"/>
         <value type="string" value="electron"/>
         <value type="string" value="ibus-ui-gtk3"/>
+        <value type="string" value="scp-dbus-service.py"/>
         <value type="string" value="vlc"/>
         <value type="string" value="clementine"/>
         <value type="string" value="discordcanary"/>
@@ -75,15 +77,18 @@
         <value type="string" value="docky"/>
         <value type="string" value="javaembeddedframe"/>
         <value type="string" value="screencloud"/>
+        <value type="string" value="hp-systray"/>
         <value type="string" value="discord-canary"/>
         <value type="string" value="gtk-recordmydesktop"/>
         <value type="string" value="photoqt"/>
         <value type="string" value="redshift-gtk"/>
+        <value type="string" value="pragha music player"/>
         <value type="string" value="networkmanager applet"/>
         <value type="string" value="."/>
         <value type="string" value="ibus panel"/>
-        <value type="string" value="notes"/>
         <value type="string" value="electronic-wechat"/>
+        <value type="string" value="notes"/>
+        <value type="string" value="kw player"/>
       </property>
       <property name="show-frame" type="bool" value="false"/>
       <property name="names-hidden" type="array">

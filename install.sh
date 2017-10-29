@@ -58,14 +58,15 @@ done &
 
 sudo dirmngr &
 sudo pacman-key --refresh-keys
-sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang docky intel-ucode i3lock i3status ibus ibus-sunpinyin graphviz jq ttf-droid ttf-fira-mono ttf-fira-sans adobe-source-han-sans-cn-fonts xfce4-goodies gvfs gvfs-smb intellij-idea-community-edition mate-system-monitor clementine flashplugin qalculate-gtk arc-gtk-theme deluge krita gimp xclip ninja python2-pip python-pip mesa-demos xorg-drivers redshift adobe-source-code-pro-fonts reflector networkmanager-openconnect screenfetch screenlets rsync gparted python-pyqt5 audacity bless ripgrep cheese fftw gource lshw networkmanager-openconnect networkmanager-openvpn opencv asciinema rustfmt tokei python-jedi python2-jedi openal numix-icon-theme-circle python-xdg python-gobject librsvg gtk3-print-backends peek puddletag vlc wavemon --noconfirm
+sudo pacman -Syu
+sudo pacman -S conky zsh neovim python2-neovim python-neovim ctags python-twisted python2-twisted curl wget cmake base-devel clang docky intel-ucode i3lock i3status ibus ibus-sunpinyin graphviz jq ttf-droid ttf-fira-mono ttf-fira-sans adobe-source-han-sans-cn-fonts xfce4-goodies gvfs gvfs-smb intellij-idea-community-edition mate-system-monitor clementine flashplugin qalculate-gtk arc-gtk-theme deluge krita gimp xclip ninja python2-pip python-pip mesa-demos xorg-drivers redshift adobe-source-code-pro-fonts reflector networkmanager-openconnect screenfetch screenlets rsync gparted python-pyqt5 audacity bless ripgrep cheese fftw gource lshw networkmanager-openconnect networkmanager-openvpn opencv asciinema rustfmt tokei python-jedi python2-jedi openal numix-icon-theme-circle python-xdg python-gobject librsvg gtk3-print-backends peek puddletag vlc wavemon tree compton --noconfirm
 gpg --keyserver http://pgp.mit.edu --recv-keys 0x4E2C6E8793298290
 gpg --recv-key B6C8F98282B944E3B0D5C2530FC3042E345AD05D
 gpg --recv-key BBBEBDBB24C6F355
 gpg --recv-key D1483FA6C3C07136
-sudo pacman -Rns pragha numix-icon-theme numix-icon-theme-square --noconfirm
-yaourt -S firefox-developer freshplayerplugin i3-gaps-next-git dmenu2 albert atom-editor-bin libtinfo skippy-xd-git sublime-text-dev photoqt tor-browser-en thermald lightdm-webkit-theme-material-git gtk-arc-flatabulous-theme-git discord-canary downgrade kwplayer screencloud xfce4-volumed-pulse jdownloader2 tilp ttf-emojione-color firefox-nightly ttf-ms-fonts --noconfirm
-sudo ln -s /usr/lib/libtinfo.so /usr/lib/libtinfo.so.5
+sudo pacman -Rns pragha --noconfirm
+sudo pacman -Rns numix-icon-theme numix-icon-theme-square --noconfirm
+yaourt -S firefox-developer i3-gaps-next-git dmenu2 albert atom-editor-bin skippy-xd-git sublime-text-dev photoqt tor-browser-en thermald lightdm-webkit-theme-material-git gtk-arc-flatabulous-theme-git discord-canary downgrade kwplayer screencloud xfce4-volumed-pulse jdownloader2 tilp ttf-emojione-color firefox-nightly ttf-ms-fonts --noconfirm
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo systemctl start thermald
 sudo systemctl enable thermald

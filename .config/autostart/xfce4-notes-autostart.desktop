@@ -100,4 +100,4 @@ Exec=xfce4-notes
 Icon=xfce4-notes-plugin
 OnlyShowIn=XFCE;GNOME;
 Terminal=false
-Hidden=false
+Hidden=true
