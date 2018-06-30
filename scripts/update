@@ -11,9 +11,10 @@ while true; do
   kill -0 $$ 2>/dev/null || exit
 done &
 
-
+rustup self update
+rustup update
 gpg --keyserver pool.sks-keyservers.net --recv-keys D1483FA6C3C07136
 sudo pacman -Syy --noconfirm
 sudo pacman -Su --noconfirm
 yaourt -Syua --noconfirm
-sudo pacman -Scc --noconfirm
+sudo pacman -Sc --noconfirm

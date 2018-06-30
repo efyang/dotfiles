@@ -1,0 +1,1 @@
+rsync --verbose --progress --omit-dir-times --no-perms --recursive --inplace --ignore-existing --delete-after '/run/media/efyang/9812C67212C65542/Users/edwar/Music/main/Music/' ./
