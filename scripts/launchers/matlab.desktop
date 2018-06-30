@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Matlab 2017
+Comment=
+Exec=/usr/local/bin/matlab -desktop
+Icon=matlab
+Path=/home/efyang/projects/matlab
+Terminal=false
+StartupNotify=false

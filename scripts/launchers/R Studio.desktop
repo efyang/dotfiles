@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=R Studio
+Comment=
+Exec=/usr/bin/rstudio-bin
+Icon=rstudio
+Path=/home/efyang/projects/r/
+Terminal=false
+StartupNotify=false
