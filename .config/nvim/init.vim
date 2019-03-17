@@ -18,34 +18,51 @@ Plug 'derekwyatt/vim-scala', {'for' : 'scala'}
 Plug 'fatih/vim-go', {'for' : 'go'}
 Plug 'rust-lang/rust.vim', {'for' : 'rust'}
 Plug 'mattn/webapi-vim', {'for' : 'rust'}
-"Plug 'Valloric/YouCompleteMe', { 'do': 'YCM_CORES=2 python2 ./install.py --clang-completer --racer-completer' }
 Plug 'lukerandall/haskellmode-vim', {'for' : 'haskell'}
-Plug 'octol/vim-cpp-enhanced-highlight', {'for' : 'cpp'}
+"Plug 'octol/vim-cpp-enhanced-highlight', {'for' : 'cpp'}
 Plug 'ap/vim-css-color', {'for' : ['javascript', 'html5', 'html']}
 Plug 'hail2u/vim-css3-syntax', {'for' : 'css'}
-Plug 'klen/python-mode', {'for' : 'python'}
+"Plug 'klen/python-mode', {'for' : 'python'}
 Plug 'wlangstroth/vim-racket', {'for' : 'racket'}
 Plug 'guns/vim-clojure-static', {'for' : 'clojure'}
 Plug 'LaTeX-Box-Team/LaTeX-Box', {'for' : 'LaTeX'}
 Plug 'vitalk/vim-shebang'
 Plug 'cespare/vim-toml', {'for' : 'toml'}
 Plug 'daeyun/vim-matlab', {'for': 'matlab'}
-"Plug 'rhysd/rust-doc.vim', {'for': 'rust'}
-" Completion
-
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neco-vim', {'for': 'vim'}
-Plug 'zchee/deoplete-jedi', {'for': 'python'}
-Plug 'zchee/deoplete-clang', {'for': ['c', 'cpp']}
-Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
 
 " Language server
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+autocmd BufReadPost *.rs setlocal filetype=rust
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly-2019-02-08', 'rls'],
+    \ 'python': ['pyls'],
+    \ 'cpp': ['cquery']}
+
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+" Maps K to hover, gd to goto definition, F2 to rename
+nnoremap <silent> K :call LanguageClient_textDocument_hover()
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()
+
 " (Optional) Multi-entry selection UI.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " (Optional) Showing function signature and inline doc.
 Plug 'Shougo/echodoc.vim'
+
+set cmdheight=2
+" Completion
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:deoplete#enable_at_startup = 1
+
 
 " Colorschemes
 Plug 'bronson/vim-crosshairs'
@@ -59,7 +76,6 @@ Plug 'morhetz/gruvbox'
 " Exterior addons
 Plug 'chaoren/vim-wordmotion'
 Plug 'bling/vim-airline'
-Plug 'ryanss/vim-hackernews', {'on': 'HackerNews'}
 Plug 'itchyny/calendar.vim', {'on': 'Calendar'}
 Plug 'mhinz/vim-startify'
 Plug 'joshhartigan/vim-reddit', {'on': 'Reddit'}
@@ -75,7 +91,6 @@ Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 Plug 'floobits/floobits-neovim'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
-Plug 'scrooloose/syntastic'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'mhinz/vim-signify'
 Plug 'majutsushi/tagbar'
@@ -126,6 +141,7 @@ Plug 'junegunn/goyo.vim', {'on': 'Goyo'}
 Plug 'jiangmiao/auto-pairs'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
+let g:SuperTabDefaultCompletionType = "<c-n>"
 Plug 'honza/vim-snippets'
 
 " All of your Plugs must be added before the following line
@@ -152,6 +168,7 @@ noremap   <Down>   <NOP>
 noremap   <Left>   <NOP>
 noremap   <Right>  <NOP>
 "autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+
 " more shebang recognition
 set hidden
 let $RUST_SRC_PATH="/home/efyang/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
@@ -163,26 +180,10 @@ filetype plugin indent on    " required
 set laststatus=2
 let g:numbers_exclude = ['tagbar', 'gundo', 'nerdtree']
 
-" Ultisnips
-let g:UltisnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:deoplete#sources={}
-let g:deoplete#sources._=['buffer', 'file', 'ultisnips', 'LanguageClient']
-let g:deoplete#sources.c=['buffer', 'file', 'ultisnips', 'deoplete-clang']
-let g:deoplete#sources.cpp=['buffer', 'file', 'ultisnips', 'deoplete-clang']
-let g:deoplete#sources.py=['buffer', 'file', 'ultisnips', 'deoplete-jedi']
-let g:deoplete#sources.vim=['buffer', 'file', 'ultisnips', 'neco-vim']
-let g:deoplete#enable_refresh_always=1
-
 " Syntastic defaults
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 " Airline config
 if !exists('g:airline_symbols')
@@ -244,6 +245,7 @@ set mouse=
 let g:indentLine_char = '│'
 let g:indentLine_color_gui = '#3B3D3A'
 "switch buffers
+
 "noremap <c-j> :bnext<cr>
 "noremap <c-k> :bprevious<cr>
 let g:ctrlp_map = '<c-p>'
@@ -273,84 +275,25 @@ let g:cargo_command = "Dispatch cargo {cmd}"
         \'i:impls,trait implementations',
     \]
     \}
-
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-" Let <Tab> also do completion
-"inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-"inoremap <silent><expr> <Tab>
-"\ pumvisible() ? "\<C-n>" :
-"\ deoplete#mappings#manual_complete()
-
 " Close the documentation window when completion is done
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 autocmd CompleteDone * pclose!
-" Language server stuff
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls']
-    \ }
-let g:LanguageClient_autoStart=1
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-set cmdheight=2
 
-let g:SuperTabDefaultCompletionType = "<c-n>" " Make the tabing on completion menu go from top to bottom
-let g:SuperTabClosePreviewOnPopupClose = 1 " Close the preview when completion ends
-" Don't map any tabs, I'll do it later
-let g:UltiSnipsExpandTrigger = '<c-j>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-let g:SuperTabMappingForward = '<tab>'
-let g:SuperTabMappingBackward = '<s-tab>'
-" Don't unmap my mappings
-let g:UltiSnipsMappingsToIgnore = [ "SmartTab", "SmartShiftTab" ]
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-" Make <CR> smart
-"let g:ulti_expand_res = 0
-"function! Ulti_ExpandOrEnter()
-  "call UltiSnips#ExpandSnippet()
-  "if g:ulti_expand_res
-    "return ''
-  "elseif pumvisible()
-    "return deoplete#mappings#close_popup()
-  "else
-    "return "\<return>"
-  "endif
-"endfunction
-"inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
+set completeopt=longest,menuone,preview
+let g:deoplete#sources = {}
+call deoplete#custom#option('sources', {
+    \ 'python': ['LanguageClient', 'file', 'ultisnips'],
+    \ 'rust': ['LanguageClient', 'file', 'ultisnips'],
+    \ 'cquery': ['LanguageClient', 'file', 'ultisnips']
+\})
 
- "Enable tabbing and shift-tabbing through list of results
-"function! g:SmartTab()
-  "if pumvisible()
-    "return SuperTab("n")
-  "else
-    "call UltiSnips#JumpForwards()
-    "if g:ulti_jump_forwards_res == 0
-      "return SuperTab("n")
-    "endif
-    "return ''
-  "endif
-"endfunction
-"inoremap <silent> <tab> <C-R>=g:SmartTab()<cr>
-"snoremap <silent> <tab> <Esc>:call g:SmartTab()<cr>
-
-"function! g:SmartShiftTab()
-  "if pumvisible()
-    "return SuperTab("p")
-  "else
-    "call UltiSnips#JumpBackwards()
-    "if g:ulti_jump_backwards_res == 0
-      "return SuperTab("p")
-    "endif
-    "return ''
-  "endif
-"endfunction
-"inoremap <silent> <s-tab> <C-R>=g:SmartShiftTab()<cr>
-"snoremap <silent> <s-tab> <Esc>:call g:SmartShiftTab()<cr>
-
-nnoremap <F5> :e<CR>
+let g:deoplete#auto_complete_start_length = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Set Colorscheme
 set background=dark
